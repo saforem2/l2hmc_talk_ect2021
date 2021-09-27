@@ -28,7 +28,7 @@
 
 <div style="margin:0 0 15 0; text-align: left; float: right; width: 48%; font-size: 0.75em;">
 
-![Icon](attachments/charge_freezing-crop.svg) <!-- .element width="400px" -->
+![Icon](attachments/charge_freezing-crop.svg)
 
 </div>
 
@@ -108,8 +108,11 @@
 
 ### Networks
 
+<div style="max-width=99%">
+
 ![](attachments/net_fns.svg)
 
+</div>
 
 ---
 	
@@ -120,4 +123,7 @@
 </div>
 
 
-<!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
+<style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=fire">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+</style>

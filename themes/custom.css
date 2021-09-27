@@ -1,0 +1,53 @@
+@import url(https://www.w3schools.com/w3css/4/w3.css)
+
+#bright {
+    color: #0096D4;
+}
+
+#ulc {
+    list-style-type: disc;
+}
+
+#ulc ulc {
+    list-style-type: square;
+    margin-left: 20px;
+}
+
+#olc {
+    list-style-type: decimal;
+}
+
+#ulc olc {
+    display: block;
+}
+
+#dark_back {
+    background-color: #212E4B,
+    color: #F7F7F7;
+    padding: 20px;
+}
+
+#left {
+  margin: 0 0 15 20;
+  vertical-align: middle;
+  text-align: left;
+  float: left;
+  z-index: -10;
+  width: 48%;
+  font-size: 0.75em;
+  line-height: 1.1;
+  /* line-height: 1.1; */
+}
+
+#right {
+  margin: 0 0 15 0;
+  float: right;
+  vertical-align: auto;
+  text-align: left;
+  z-index: -10;
+  width: 48%;
+  font-size: 0.75em;
+  /* font-size: 0.75; */
+  line-height: 1.05;
+  /* line-height=1.05; */
+}

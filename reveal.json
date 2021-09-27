@@ -2,5 +2,7 @@
     "controls": true,
     "progress": true,
     "history": true,
-    "slideNumber": true
+    "slideNumber": true,
+    "transition": "fade",
+    "center": true
 }

@@ -14,8 +14,46 @@
   </head>
   <body>
     <div class="reveal">
-      <div class="slides"><section  data-markdown><script type="text/template"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Sofia|Source+Sans+Pro">
-<style>
+      <div class="slides"><section  data-markdown><script type="text/template"><style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&family=Source+Sans+Pro&display=swap');
+
+:root {
+    --r-main-font: 'Source Sans Pro', sans-serif;
+    --r-heading-font: 'Roboto', Arial, Helvetica, sans-serif;
+    --r-heading-text-transform: none;
+    --r-heading1-size: 2.0em;
+    --r-heading2-size: 1.5em;
+    --r-heading3-size: 1.2em;
+    --r-heading4-size: 1.15em;
+    --r-link-color: #00CCFF;
+    --r-link-color-dark: #f92672;
+    --r-link-color-hover: #63ff51;
+    --r-controls-color: #D7E6F3;
+    --r-progress-color: #f20052;
+    --r-selection-background-color: rgba(30, 60, 107, 0.9);
+    --r-selection-color: #fff;
+    --r-main-font-size: 36px;
+    --r-main-color: #222;
+    --r-block-margin: 20px;
+    --r-heading-margin: 0 0 20px 0;
+    --r-heading-color: #222;
+    --r-heading-line-height: 1.2;
+    --r-heading-letter-spacing: -0.45px;
+    --r-heading-word-spacing: 0.5px;
+}
+
+.reveal {
+        font-family: 'Source Sans Prop', sans-serif;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4 {
+    font-family: 'Roboto', sans-serif;
+}
+
 #left {
   margin: 0 0 15 10;
   text-align: left;
@@ -133,8 +171,8 @@ x'\text{ w/ prob. } A(\xi'|\xi),\\
 x_{i} \text{ w/ prob. }1 - A(\xi'|\xi)
 \end{cases}$
 </div>
+and  $A(\xi'|\xi)=\min\left\{1,\frac{p(\xi')}{p(\xi)}\left|\frac{\partial\xi'}{\partial\xi}\right|\right\}$
 
-and  `$A(\xi'|\xi)=\min\left\{1,\frac{p(\xi')}{p(\xi)}\left|\frac{\partial\xi'}{\partial\xi}\right|\right\}$`
 
 </div>
 </div>

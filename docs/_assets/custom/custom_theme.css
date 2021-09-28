@@ -2,7 +2,7 @@
 
 @font-face {
     font-family: Roboto-Regular;
-    src: url('../font/Roboto-Regular.ttf');
+    src: url('./fonts/robot/Roboto-Regular.ttf');
 }
 
 section.has-dark-background,
@@ -23,7 +23,7 @@ section.has-dark-background h6 {
     --r-main-color: #222;
     --r-block-margin: 20px;
     --r-heading-margin: 0 0 20px 0;
-    --r-heading-font: "Roboto", "HK Groktesk", "Source Sans Pro", Helvetica, sans-serif;
+    --r-heading-font: Roboto-Regular, Roboto, Open Sans, Arial, "HK Groktesk", "Source Sans Pro", Helvetica, sans-serif;
     --r-heading-color: #222;
     --r-heading-line-height: 1.2;
     --r-heading-letter-spacing: -0.45px;

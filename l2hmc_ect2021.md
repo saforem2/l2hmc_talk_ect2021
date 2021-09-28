@@ -1,5 +1,4 @@
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=fire">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Sofia|Source+Sans+Pro">
 <style>
 #left {
   margin: 0 0 15 10;
@@ -23,13 +22,13 @@
     color: #efefef;
 }
 #bright {
-    color: #F92672;
+    color: #Fa5252;
 }
 #note {
-    background-color: rgba(30, 60, 107, 0.25);
-    border-style: solid;
+    background-color: rgba(215, 230, 243, 0.5);
+    behavior:
     border-radius: 5px;
-    background-color: rgba(109, 158, 235, 0.45);
+    border-color: rgba(215, 230, 243, 0.5);
     padding: auto;
     margin: auto;
 }
@@ -44,8 +43,8 @@
 
 ##### 09/29/2021
 
-[<img align="left" width=10% src="attachments/github.svg">](https://github.com/saforem2/l2hmc-qcd)
-[<img align="right" width=30% src="attachments/Argonne_cmyk_white.svg">](https://alcf.anl.gov)
+[<img align="left" width=10% src="assets/github.svg">](https://github.com/saforem2/l2hmc-qcd)
+[<img align="right" width=30% src="assets/Argonne_cmyk_white.svg">](https://alcf.anl.gov)
 
 ---
 
@@ -71,7 +70,7 @@
 
 <div id="right">
 
-![charge_freezing](attachments/charge_freezing-crop.svg)
+![charge_freezing](assets/charge_freezing-crop.svg)
 
 </div>
 
@@ -115,7 +114,7 @@ Starting from $x_0$, we integrate along a _trajectory_ by
 
 <div id="right" style="font-size:0.66em;">
 
-<div id="note" style="margin:auto; padding:5px; text-align:left; float: right; background-color:#efefef; border:none;">
+<div id="note" style="margin:auto; padding:5px; text-align:left; float: right; border:none;">
 
 ### <u>Accept / Reject:</u>
 <div style="padding-left:10px;">
@@ -147,7 +146,8 @@ and  `$A(\xi'|\xi)=\min\left\{1,\frac{p(\xi')}{p(\xi)}\left|\frac{\partial\xi'}{
 
 ---
 
-![](attachments/pdfs/l2hmc_slides_svg/slides3.svg)  <!-- element.width:100% -->
+<!-- .slide: data-background="assets/hmc_slide.svg" -->
+<!-- ![](assets/hmc_slide.svg)  <!-- element.width:100% --> -->
 
 ---
 
@@ -165,7 +165,7 @@ and  `$A(\xi'|\xi)=\min\left\{1,\frac{p(\xi')}{p(\xi)}\left|\frac{\partial\xi'}{
 </div>
 </div> -->
 
-![](attachments/hmc-crop.svg)
+![](assets/hmc-crop.svg)
 
 ---
 
@@ -173,7 +173,7 @@ and  `$A(\xi'|\xi)=\min\left\{1,\frac{p(\xi')}{p(\xi)}\left|\frac{\partial\xi'}{
 
 <div style="max-width=99%">
 
-![](attachments/net_fns.svg)
+![](assets/net_fns.svg)
 
 </div>
 

@@ -58,16 +58,18 @@
   $$ p(x, v) = p(x) \cdot p(v) = e^{-\beta S(x)}\cdot e^{-v^{T}v / 2} = e^{-H(x, v)}$$
 
 - We can evolve the joint $\xi = (x, v)$ system using **Hamiltons equations** along $H=\text{const.}:$
-  <div id="note">
+  <div id="noteinverse" style="max-width:50%;padding:2px;text-align:center;">
 
-  $$ \dot{x} = \frac{\partial H}{\partial v},\quad \dot{v} = -\frac{\partial H}{\partial x}$$
+  $ \dot{x} = \frac{\partial H}{\partial v},\quad \dot{v} = -\frac{\partial H}{\partial x}$
 
   </div>
 </script></section><section  data-markdown><script type="text/template">
 ## Integrate Hamilton's equations
 <div style="font-size:0.8em;line-height:1.25;">
 
-<div style="color: var(--r-link-color);font-weight:2000;">$$\dot{x}=\frac{\partial H}{\partial v},\quad \dot{v} = -\frac{\partial H}{\partial x}$$</div>
+<div id="note" style="max-width:40%;padding:2px;">
+<div style="color: #FF5252;">$$\dot{x}=\frac{\partial H}{\partial v},\quad \dot{v} = -\frac{\partial H}{\partial x}$$</div>
+</div>
 
 <!-- Starting from $x_0$, we integrate along a _trajectory_ from $(x_{0}, v_{0})$ to $(x', v') -->
 <!-- We can construct a **trajectory** of length $N_{\mathrm{LF}}$ leapfrog steps by: -->
@@ -81,7 +83,7 @@
 
 <div id="note" style="margin:auto; margin-left:70px;margin-right: -60px;text-align:left; float: left; padding:10px; line-height:1.5;">
 
-### <u>Leapfrog Step:</u>
+### <u><b>Leapfrog Step:</b></u>
 <ol style="text-align: left; padding-right: 20px;margin-top:-10px;">
 <li> $\,\, \tilde{v}\leftarrow v - \frac{\varepsilon}{2}\cdot \partial_{x} S(x)$</li>
 <div id="bright"><li> $\,\, x'\leftarrow x + \varepsilon \tilde{v}$</li> </div>
@@ -93,10 +95,10 @@
 
 <div id="right" style="font-size:0.8em;margin-top: 20px;">
 
-<div id="note" style="margin:auto; padding:5px; text-align:left; float: right; border:none;line-height:1.5;">
+<div id="note" style="margin:auto; padding:10px; text-align:left; float: right; border:none;line-height:1.5;">
 
-### <u>Accept / Reject:</u>
-<div style="padding-left:10px; margin-top:-10px;">
+### <u><b>Accept / Reject:</b></u>
+<div style="padding-left:10px; margin-top:-10px;line-height:1.5;">
 
 <div id="bright">
 $x_{i+1}\leftarrow\begin{cases}
@@ -112,22 +114,15 @@ and  $A(\xi'|\xi)=\min\left\{1,\frac{p(\xi')}{p(\xi)}\left|\frac{\partial\xi'}{\
 </div>
 </div>
 </script></section><section  data-markdown><script type="text/template">
-**Metropolis-Hastings accept/reject**
-  `\[\begin{equation}
-  x_{i+1}\leftarrow
-  \begin{cases}
-  x'\quad\text{w/prob.}\quad A(\xi'|\xi)=\min\left\{1,\frac{p(\xi')}{p(\xi)}\left|\frac{\partial\xi'}{\partial\xi}\right|\right\},\\
-      x_{i} \quad\text{w/prob.}\quad 1 - A(\xi'|\xi)
-  \end{cases}
-  \end{equation}\]`
+<!-- .slide: data-background="assets/l2hmc/svgs/l2hmc3.svg" -->
 </script></section><section  data-markdown><script type="text/template">
-<!-- .slide: data-background="assets/l2hmc/hmc1.svg" -->
+<!-- .slide: data-background="assets/l2hmc/svgs/l2hmc4.svg" -->
 </script></section><section  data-markdown><script type="text/template">
-<!-- .slide: data-background="assets/l2hmc/generalized_leapfrog.svg" -->
+<!-- .slide: data-background="assets/l2hmc/svgs/l2hmc5.svg" -->
 </script></section><section  data-markdown><script type="text/template">
-<!-- .slide: data-background="assets/l2hmc/generalized_leapfrog_train.svg" -->
+<!-- .slide: data-background="assets/l2hmc/svgs/l2hmc6.svg" -->
 </script></section><section  data-markdown><script type="text/template">
-<!-- .slide: data-background="assets/l2hmc/lattice.svg" -->
+<!-- .slide: data-background="assets/l2hmc/svgs/l2hmc7.svg" -->
 </script></section><section  data-markdown><script type="text/template">
 ## Hamiltonian Monte Carlo (HMC)
 
@@ -141,12 +136,6 @@ and  $A(\xi'|\xi)=\min\left\{1,\frac{p(\xi')}{p(\xi)}\left|\frac{\partial\xi'}{\
 
 </div>
 </script></section><section  data-markdown><script type="text/template">	
-<div class="sl-block" style="width: auto; height: auto;">
-	<div class="sl-block-content notranslate" style="z-index: 15; background-color: rgba(109, 158, 235, 0.35); border-style: solid; border-radius: 5px; border-color: rgb(255, 255, 255); padding: 4px;">
-		$p(\xi) = p(x)\cdot p(v)\cdot p(d)$
-	</div>
-</div>
-
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto:wght@500&family=Source+Sans+Pro&display=swap');
 
@@ -169,7 +158,7 @@ and  $A(\xi'|\xi)=\min\left\{1,\frac{p(\xi')}{p(\xi)}\left|\frac{\partial\xi'}{\
     --r-main-color: #222;
     --r-block-margin: 20px;
     --r-heading-margin: 0 0 20px 0;
-    --r-heading-color: #00A2FF;
+    --r-heading-color: #222;
     --r-heading-line-height: 1.2;
     --r-heading-letter-spacing: -0.05em;
     --r-heading-word-spacing: 0.5px;
@@ -248,13 +237,26 @@ and  $A(\xi'|\xi)=\min\left\{1,\frac{p(\xi')}{p(\xi)}\left|\frac{\partial\xi'}{\
     }
 }
 #bright {
-    color: #FF4050;
+    color: #00A2FF;
+}
+
+#brightred {
+    color: #FF5252;
+}
+
+#noteinverse {
+    background-color: #1c1c1c;
+    border-radius: 5px;
+    border-color: #1c1c1c;
+    color: #efefef;
+    padding: auto;
+    margin: auto;
 }
 
 #note {
-    background-color: rgba(215, 230, 243, 0.5);
+    background-color: rgba(240, 240, 240, 0.90);
     border-radius: 5px;
-    border-color: rgba(215, 230, 243, 0.5);
+    border-color: rgba(240, 240, 240, 1.0);
     padding: auto;
     margin: auto;
 }

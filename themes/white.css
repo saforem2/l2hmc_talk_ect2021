@@ -1,4 +1,5 @@
 /* @import url(./fonts/source-sans-pro/source-sans-pro.css); */
+
 section.has-dark-background,
 section.has-dark-background h1,
 section.has-dark-background h2,
@@ -9,20 +10,15 @@ section.has-dark-background h6 {
     color: #fff;
 }
 
-#dark_back {
-    background-color: #1c1c1c;
-    color: #efefef;
-}
-
 /* /_ GLOBAL STYLES _/ */
 :root {
     --r-background-color: #fff;
-    --r-main-font: Helvetica Neue, sans-serif;
-    --r-main-font-size: 36px;
+    --r-main-font: "Helvetica Neue", Arial, sans-serif;
+    --r-main-font-size: 40px;
     --r-main-color: #222;
     --r-block-margin: 20px;
     --r-heading-margin: 0 0 20px 0;
-    --r-heading-font: "Roboto", "HK Grotesk", "Source Sans Pro", Helvetica, sans-serif;
+    --r-heading-font: "Roboto", "HK Groktesk", "Source Sans Pro", Helvetica, sans-serif;
     --r-heading-color: #222;
     --r-heading-line-height: 1.2;
     --r-heading-letter-spacing: -0.45px;
@@ -360,21 +356,29 @@ box-shadow: 0 0 20px rgba(0, 0, 0, 0.55);
 }
 
 #bright {
-    color: #0096D4;
+    color: #F92672;
 }
 
 #note {
-    float: left;
-    text-align: left;
+    /* float: left; */
+    /* text-align: left; */
     /* background-color: rgba(109, 158, 235, 0.35); */
     background-color: rgba(30, 60, 107, 0.35);
     border-style: solid;
     border-radius: 5px;
     background-color: rgba(109, 158, 235, 0.45);
-    max-width: 80%;
-    max-height: 95%;
+    /* text-align: inherit; */
+    padding: auto;
     margin: auto;
-    padding: 5px;
+    wid
+    /* width: auto;
+    height: auto;
+    margin: auto;
+    padding: auto; */
+    /* max-width: 80%; */
+    /* max-height: 95%; */
+    /* margin: auto; */
+    /* padding: 5px; */
 }
 
 .clearfix::after {
@@ -387,33 +391,38 @@ box-shadow: 0 0 20px rgba(0, 0, 0, 0.55);
   display: flex;
   justify-content: left;
   align-items: left;
+  max-width: 95%;
   /* height: 200px; */
   /* border: 3px solid green; */
 }
 
 #left {
-  margin: 0 0 15 20;
-  vertical-align: middle;
+  margin: 0 0 15 10;
+  /* max-width: 49%; */
   text-align: left;
   float: left;
   z-index: -10;
   width: 48%;
-  font-size: 0.75em;
-  line-height: 1.1;
+  font-size: 0.85em;
   /* line-height: 1.1; */
 }
 
 #right {
   margin: 0 0 15 0;
   float: right;
-  vertical-align: auto;
+  max-width: 48%;
   text-align: left;
   z-index: -10;
   width: 48%;
-  font-size: 0.75em;
-  /* font-size: 0.75; */
-  line-height: 1.05;
-  /* line-height=1.05; */
+  font-size: 0.85em;
+  /* line-height: 1.05; */
 }
 
+#dark_back {
+    background-color: #1c1c1c;
+    color: #efefef;
+}
+
+
 /* # sourceMappingURL=white.css.map */
+/* @import url("https://fonts.googleapis.com/css?family=Roboto") */

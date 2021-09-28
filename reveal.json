@@ -2,10 +2,6 @@
     "controls": true,
     "progress": true,
     "history": true,
-    "width": 960,
-    "height": 700,
-    "margin": 0.04,
-    "minScale": 0.2,
     "slideNumber": true,
     "transition": "fade",
     "center": true

@@ -5,6 +5,10 @@
     src: url('./font/roboto/Roboto-Regular.ttf');
 }
 
+ul {
+    margin-left: 10px;
+}
+
 section.has-dark-background,
 section.has-dark-background h1,
 section.has-dark-background h2,
@@ -46,6 +50,11 @@ section.has-dark-background h6 {
     --r-progress-color: #f20052;
     --r-selection-background-color: rgba(30, 60, 107, 0.9);
     --r-selection-color: #fff;
+}
+
+.katex .mathdefault {
+    font-family: KaTeX_Math;
+    font-style: italic;
 }
 
 .reveal-viewport {

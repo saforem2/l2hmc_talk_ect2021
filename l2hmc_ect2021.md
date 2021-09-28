@@ -22,23 +22,23 @@ highlightTheme: github
 
 ---
 
-<div id="left" style="font-size: 0.75em;">
-
 ## <div style="color: #3B4CC0;">Critical Slowing Down</div>
+
+<div id="left" style="font-size: 0.85em;">
 
 - As $\beta\rightarrow\infty$, configurations tend to get stuck at $Q=\text{const}$.
 
 - Equivalently, the _**tunneling rate**_: $\delta Q\equiv\left|Q_{i+1} - Q_{i}\right|\rightarrow 0$ as $\beta\rightarrow\infty$
 
 - <div id="note" style="padding-left: 10px; padding-top: 5px; padding-bottom: 6px;">
-  	<b>Goal</b>: Draw <i>independent</i> samples from target distribution $p(x)\propto e^{-\beta\,S(x)}$
+  	<b><u>Goal</u></b>: Draw <i>independent</i> samples from target distribution $p(x)\propto e^{-\beta\,S(x)}$
   </div>
 
 </div>
 
 <div id="right">
 
-![charge_freezing](assets/charge_freezing-crop.svg)
+<img align="right" width=90% src="assets/charge_freezing-crop.svg">
 
 </div>
 
@@ -46,26 +46,33 @@ highlightTheme: github
 
 ## Hamiltonian Monte Carlo (HMC)
 
-- Introduce $v \sim \mathcal{N}(0, \mathbb{1})$ distributed independently of $x$
+<div style="text-align:left;">
+
+- **Momentum**: $v \sim \mathcal{N}(0, \mathbb{1})$ distributed independently of $x$
 
 - Our target density is then:
   $$ p(x, v) = p(x) \cdot p(v) = e^{-\beta S(x)}\cdot e^{-v^{T}v / 2} = e^{-H(x, v)}$$
 
 - We can evolve the joint $\xi = (x, v)$ system using **Hamiltons equations** along $H=\text{const.}:$
-  <div id="noteinverse" style="max-width:50%;padding:2px;text-align:center;">
+  <div id="note" style="max-width:50%;padding:2px;text-align:center;">
+  <div id="brightred">
 
   $ \dot{x} = \frac{\partial H}{\partial v},\quad \dot{v} = -\frac{\partial H}{\partial x}$
 
   </div>
+  </div>
+
+</div>
 
 ---
 
 ## Integrate Hamilton's equations
-<div style="font-size:0.8em;line-height:1.25;">
 
-<div id="note" style="max-width:40%;padding:2px;">
-<div style="color: #FF5252;">$$\dot{x}=\frac{\partial H}{\partial v},\quad \dot{v} = -\frac{\partial H}{\partial x}$$</div>
+<div id="note" style="max-width:40%;padding:2px;font-size:0.6em;">
+<div id="brightred">$$\dot{x}=\frac{\partial H}{\partial v},\quad \dot{v} = -\frac{\partial H}{\partial x}$$</div>
 </div>
+
+<div style="font-size:0.8em;line-height:1.25;">
 
 <!-- Starting from $x_0$, we integrate along a _trajectory_ from $(x_{0}, v_{0})$ to $(x', v') -->
 <!-- We can construct a **trajectory** of length $N_{\mathrm{LF}}$ leapfrog steps by: -->
@@ -81,8 +88,8 @@ highlightTheme: github
 
 ### <u><b>Leapfrog Step:</b></u>
 <ol style="text-align: left; padding-right: 20px;margin-top:-10px;">
+<span id="bright"><li> $\,\, x'\leftarrow x + \varepsilon \tilde{v}$</li> </span>
 <li> $\,\, \tilde{v}\leftarrow v - \frac{\varepsilon}{2}\cdot \partial_{x} S(x)$</li>
-<div id="bright"><li> $\,\, x'\leftarrow x + \varepsilon \tilde{v}$</li> </div>
 <li> $\,\, v' \leftarrow \tilde{v} - \frac{\varepsilon}{2}\cdot \partial_{x} S(x')$</li>
 
 </div>
@@ -111,24 +118,49 @@ and  $A(\xi'|\xi)=\min\left\{1,\frac{p(\xi')}{p(\xi)}\left|\frac{\partial\xi'}{\
 </div>
 
 ---
+## Hamiltonian Monte Carlo (HMC)
 
-<!-- .slide: data-background="assets/l2hmc/svgs/l2hmc3.svg" -->
+<div style="font-size: 0.75em;">
+
+- Introduce auxiliary momentum $v \sim \mathcal{N}(0, \mathbb{1})$ distributed
+  independently of $x$.
+
+- Target distribution becomes:
+$$ p(x, v) = p(x)\cdot p(v) = e^{-\beta S(x)}\cdot e^{-v^{T}v/2} $$
+
+<img align="center" width=75% src="assets/hmc-crop.svg">
+
+</div>
 
 ---
 
-<!-- .slide: data-background="assets/l2hmc/svgs/l2hmc4.svg" -->
+## Hamiltonian Monte Carlo (HMC)
+
+<!-- .slide: data-background="./assets/l2hmc/svgs/l2hmc3.svg" -->
+<!-- ![](./assets/l2hmc/svgs/l2hmc3.svg) -->
 
 ---
 
-<!-- .slide: data-background="assets/l2hmc/svgs/l2hmc5.svg" -->
+## Generalizing HMC
+
+- Introduce persistent direction $d\sim\mathcal{U}(+, -)$ (_forward_,
+  _backward_)
 
 ---
 
-<!-- .slide: data-background="assets/l2hmc/svgs/l2hmc6.svg" -->
+![](assets/l2hmc/svgs/l2hmc4.svg)
 
 ---
 
-<!-- .slide: data-background="assets/l2hmc/svgs/l2hmc7.svg" -->
+![](assets/l2hmc/svgs/l2hmc5.svg)
+
+---
+
+![](assets/l2hmc/svgs/l2hmc6.svg)
+
+---
+
+![](assets/l2hmc/svgs/l2hmc7.svg)
 
 ---
 

@@ -1,4 +1,6 @@
-/* @import url(./fonts/source-sans-pro/source-sans-pro.css); */
+@import url("https://fonts.googleapis.com/css?family=HK%20Grotesk")
+@import url("https://fonts.googleapis.com/css?family=Roboto")
+@import url(./fonts/source-sans-pro/source-sans-pro.css);
 
 section.has-dark-background,
 section.has-dark-background h1,
@@ -14,7 +16,7 @@ section.has-dark-background h6 {
 :root {
     --r-background-color: #fff;
     --r-main-font: "Helvetica Neue", Arial, sans-serif;
-    --r-main-font-size: 40px;
+    --r-main-font-size: 36px;
     --r-main-color: #222;
     --r-block-margin: 20px;
     --r-heading-margin: 0 0 20px 0;
@@ -420,4 +422,3 @@ box-shadow: 0 0 20px rgba(0, 0, 0, 0.55);
 
 
 /* # sourceMappingURL=white.css.map */
-/* @import url("https://fonts.googleapis.com/css?family=Roboto") */

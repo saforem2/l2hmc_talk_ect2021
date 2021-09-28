@@ -1,5 +1,39 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=fire">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<style>
+#left {
+  margin: 0 0 15 10;
+  text-align: left;
+  float: left;
+  z-index: -10;
+  width: 48%;
+  font-size: 0.85em;
+}
+#right {
+  margin: 0 0 15 0;
+  float: right;
+  max-width: 48%;
+  text-align: left;
+  z-index: -10;
+  width: 48%;
+  font-size: 0.85em;
+}
+#dark_back {
+    background-color: #1c1c1c;
+    color: #efefef;
+}
+#bright {
+    color: #F92672;
+}
+#note {
+    background-color: rgba(30, 60, 107, 0.25);
+    border-style: solid;
+    border-radius: 5px;
+    background-color: rgba(109, 158, 235, 0.45);
+    padding: auto;
+    margin: auto;
+}
+</style>
 
 <!-- .slide: data-background="#1c1c1c" -->
 <h2 class="r-fit-text">Training Topological Samplers</h2>
@@ -50,7 +84,7 @@
 - Our target density is then:
   $$ p(x, v) = p(x) \cdot p(v) = e^{-\beta S(x)}\cdot e^{-v^{T}v / 2} = e^{-H(x, v)}$$
 
-- We can evolve the joint $\xi = (x, v)$ system using **Hamilton's equations** along $H=\text{const.}:$
+- We can evolve the joint $\xi = (x, v)$ system using **Hamiltons equations** along $H=\text{const.}:$
   $$ \dot{x} = \frac{\partial H}{\partial v},\quad \dot{v} = -\frac{\partial H}{\partial x}$$
 
 ---
@@ -59,8 +93,9 @@
 
 $$\dot{x}=\frac{\partial H}{\partial v},\quad \dot{v} = -\frac{\partial H}{\partial x}$$
 
-We can construct a _trajectory_ by:
+Starting from $x_0$, we integrate along a _trajectory_ by 
 1. Resample the momentum $v\sim\mathcal{N}(0,\mathbb{1})$
+2. For $i = 1,
 
 <div id="left" style="font-size:0.8em;">
 
@@ -149,7 +184,3 @@ and  `$A(\xi'|\xi)=\min\left\{1,\frac{p(\xi')}{p(\xi)}\left|\frac{\partial\xi'}{
 		$p(\xi) = p(x)\cdot p(v)\cdot p(d)$
 	</div>
 </div>
-
-
-<style>
-</style>

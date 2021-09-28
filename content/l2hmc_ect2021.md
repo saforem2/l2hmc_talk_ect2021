@@ -1,4 +1,3 @@
-<link rel="stylesheet" src="../themes/white.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=fire">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 
@@ -17,6 +16,8 @@
 ---
 
 # Generating Gauge Configurations
+
+- In order to calculate physical quantities of interest, we 
 
 ---
 

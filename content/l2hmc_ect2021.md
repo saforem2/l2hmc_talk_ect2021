@@ -21,7 +21,6 @@
 
 ---
 
-<!-- <div style="text-align: left; width: 48%; font-size: 0.75em; line-height: 1.2;"> -->
 <div id="left" style="font-size: 0.75em;">
 
 ## <div style="color: #3B4CC0;">Critical Slowing Down</div>
@@ -36,7 +35,7 @@
 
 </div>
 
-<div style="margin:0 0 15 0; text-align: left; float: right; width: 48%; font-size: 0.75em; max-height: 95%;">
+<div id="right">
 
 ![charge_freezing](attachments/charge_freezing-crop.svg)
 
@@ -45,7 +44,6 @@
 ---
 
 ## Hamiltonian Monte Carlo (HMC)
-<div style="font-size: 0.6em;text-align: left;">
 
 - Introduce $v \sim \mathcal{N}(0, \mathbb{I})$ distributed independently of $x$
 
@@ -55,24 +53,33 @@
 - We can evolve the joint $\xi = (x, v)$ system using **Hamilton's equations** along $H=\text{const.}:$
   $$ \dot{x} = \frac{\partial H}{\partial v},\quad \dot{v} = -\frac{\partial H}{\partial x}$$
 
-<div id="left">
+---
 
-- ## Leapfrog Integrator
+## Integrate Hamilton's equations
 
-  <div id="note" style="margin:auto; text-align:left; float: left;padding-top:20px; padding-right: 20px; line-height:1.75;font-size:1.2em;">
-  <ol>
-  <li> $\,\, \tilde{v}\leftarrow v - \frac{\varepsilon}{2}\cdot \partial_{x} S(x)$</li>
-  <div id="bright"><li> $\,\, x'\leftarrow x + \varepsilon \tilde{v}$</li> </div>
-  <li> $\,\, v' \leftarrow \tilde{v} - \frac{\varepsilon}{2}\cdot \partial_{x} S(x')$</li>
-  </div>
+$$\dot{x}=\frac{\partial H}{\partial v},\quad \dot{v} = -\frac{\partial H}{\partial x}$$
 
+We can construct a _trajectory_ by:
+1. Resample the momentum $v\sim\mathcal{N}(0,\mathbb{1})$
+
+<div id="left" style="font-size:0.8em;">
+
+<div id="note" style="margin:auto; text-align:left; float: left; padding:10px; line-height:1.5;">
+
+### <u>Leapfrog Step:</u>
+<div style="font-size:0.7em;">$\xi\equiv (x, v)\rightarrow (x', v')$</div>
+<ol style="text-align: left; padding-right: 20px;">
+<li> $\,\, \tilde{v}\leftarrow v - \frac{\varepsilon}{2}\cdot \partial_{x} S(x)$</li>
+<div id="bright"><li> $\,\, x'\leftarrow x + \varepsilon \tilde{v}$</li> </div>
+<li> $\,\, v' \leftarrow \tilde{v} - \frac{\varepsilon}{2}\cdot \partial_{x} S(x')$</li>
 </div>
 
 </div>
 
-<div id="right" style="font-size:0.6em;">
+</div>
 
-<!-- `\begin{equation} -->
+<div id="right" style="font-size:0.66em;">
+
 <div id="note" style="margin:auto; padding:5px; text-align:left; float: right; background-color:#efefef; border:none;">
 
 ### <u>Accept / Reject:</u>
@@ -86,7 +93,6 @@ x_{i} \text{ w/ prob. }1 - A(\xi'|\xi)
 </div>
 
 and  `$A(\xi'|\xi)=\min\left\{1,\frac{p(\xi')}{p(\xi)}\left|\frac{\partial\xi'}{\partial\xi}\right|\right\}$`
-<!-- \end{cases}\end{equation}` -->
 
 </div>
 </div>

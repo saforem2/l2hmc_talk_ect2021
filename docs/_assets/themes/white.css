@@ -360,17 +360,12 @@ box-shadow: 0 0 20px rgba(0, 0, 0, 0.55);
 }
 
 #note {
-    /* float: left; */
-    /* text-align: left; */
-    /* background-color: rgba(109, 158, 235, 0.35); */
-    background-color: rgba(30, 60, 107, 0.35);
+    background-color: rgba(30, 60, 107, 0.25);
     border-style: solid;
     border-radius: 5px;
     background-color: rgba(109, 158, 235, 0.45);
-    /* text-align: inherit; */
     padding: auto;
     margin: auto;
-    wid
     /* width: auto;
     height: auto;
     margin: auto;

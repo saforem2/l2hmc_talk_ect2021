@@ -1,84 +1,14 @@
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&family=Source+Sans+Pro&display=swap');
-
-:root {
-    --r-main-font: 'Source Sans Pro', sans-serif;
-    --r-heading-font: 'Roboto', Arial, Helvetica, sans-serif;
-    --r-heading-text-transform: none;
-    --r-heading1-size: 2.0em;
-    --r-heading2-size: 1.5em;
-    --r-heading3-size: 1.2em;
-    --r-heading4-size: 1.15em;
-    --r-link-color: #00CCFF;
-    --r-link-color-dark: #f92672;
-    --r-link-color-hover: #63ff51;
-    --r-controls-color: #D7E6F3;
-    --r-progress-color: #f20052;
-    --r-selection-background-color: rgba(30, 60, 107, 0.9);
-    --r-selection-color: #fff;
-    --r-main-font-size: 36px;
-    --r-main-color: #222;
-    --r-block-margin: 20px;
-    --r-heading-margin: 0 0 20px 0;
-    --r-heading-color: #222;
-    --r-heading-line-height: 1.2;
-    --r-heading-letter-spacing: -0.45px;
-    --r-heading-word-spacing: 0.5px;
-}
-
-.reveal {
-        font-family: 'Source Sans Prop', sans-serif;
-}
-
-.reveal h1,
-.reveal h2,
-.reveal h3,
-.reveal h4 {
-    font-family: 'Roboto', sans-serif;
-}
-
-#left {
-  margin: 0 0 15 10;
-  text-align: left;
-  float: left;
-  z-index: -10;
-  width: 48%;
-  font-size: 0.85em;
-}
-#right {
-  margin: 0 0 15 0;
-  float: right;
-  max-width: 48%;
-  text-align: left;
-  z-index: -10;
-  width: 48%;
-  font-size: 0.85em;
-}
-#dark_back {
-    background-color: #1c1c1c;
-    color: #efefef;
-}
-#bright {
-    color: #Fa5252;
-}
-#note {
-    background-color: rgba(215, 230, 243, 0.5);
-    behavior:
-    border-radius: 5px;
-    border-color: rgba(215, 230, 243, 0.5);
-    padding: auto;
-    margin: auto;
-}
-</style>
+---
+title: "l2hmc-qcd @ ECT 2021"
+theme: simple
+highlightTheme: github
+---
 
 <!-- .slide: data-background="#1c1c1c" -->
-<h2 class="r-fit-text">Training Topological Samplers</h2>
-
-## for Lattice Gauge Theories
-
-### <div style="color: #00CCFF">[**Sam Foreman**](mailto://foremans@anl.gov)</div>
-
+<!-- <h2 class="r-fit-text">Training Topological Samplers</h2> -->
+## Training Topological Samplers
+### for Lattice Gauge Theories
+## <div style="color: #00CCFF">[**Sam Foreman**](mailto://foremans@anl.gov)</div>
 ##### 09/29/2021
 
 [<img align="left" width=10% src="assets/github.svg">](https://github.com/saforem2/l2hmc-qcd)
@@ -222,3 +152,78 @@ and  $A(\xi'|\xi)=\min\left\{1,\frac{p(\xi')}{p(\xi)}\left|\frac{\partial\xi'}{\
 		$p(\xi) = p(x)\cdot p(v)\cdot p(d)$
 	</div>
 </div>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&family=Source+Sans+Pro&display=swap');
+
+:root {
+    --r-main-font: 'Source Sans Pro', sans-serif;
+    --r-heading-font: 'Roboto', Arial, Helvetica, sans-serif;
+    --r-heading-text-transform: none;
+    --r-heading1-size: 2.0em;
+    --r-heading2-size: 1.5em;
+    --r-heading3-size: 1.2em;
+    --r-heading4-size: 1.15em;
+    --r-link-color: #00CCFF;
+    --r-link-color-dark: #f92672;
+    --r-link-color-hover: #63ff51;
+    --r-controls-color: #D7E6F3;
+    --r-progress-color: #f20052;
+    --r-selection-background-color: rgba(30, 60, 107, 0.9);
+    --r-selection-color: #fff;
+    --r-main-font-size: 36px;
+    --r-main-color: #222;
+    --r-block-margin: 20px;
+    --r-heading-margin: 0 0 20px 0;
+    --r-heading-color: #222;
+    --r-heading-line-height: 1.2;
+    --r-heading-letter-spacing: -0.45px;
+    --r-heading-word-spacing: 0.5px;
+}
+
+.reveal {
+        font-family: 'Source Sans Prop', sans-serif;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4 {
+    font-family: 'Roboto', sans-serif;
+}
+
+#left {
+  margin: 0 0 15 10;
+  text-align: left;
+  float: left;
+  z-index: -10;
+  width: 48%;
+  font-size: 0.85em;
+}
+#right {
+  margin: 0 0 15 0;
+  float: right;
+  max-width: 48%;
+  text-align: left;
+  z-index: -10;
+  width: 48%;
+  font-size: 0.85em;
+}
+#dark_back {
+    background-color: #1c1c1c;
+    color: #efefef;
+}
+#bright {
+    color: #Fa5252;
+}
+#note {
+    background-color: rgba(215, 230, 243, 0.5);
+    behavior:
+    border-radius: 5px;
+    border-color: rgba(215, 230, 243, 0.5);
+    padding: auto;
+    margin: auto;
+}
+</style>
+

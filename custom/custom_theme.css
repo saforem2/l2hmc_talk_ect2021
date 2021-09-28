@@ -1,6 +1,9 @@
-@import url("https://fonts.googleapis.com/css?family=HK%20Grotesk")
-@import url("https://fonts.googleapis.com/css?family=Roboto")
-@import url(./fonts/source-sans-pro/source-sans-pro.css);
+/* @import url(./fonts/source-sans-pro/source-sans-pro.css); */
+
+@font-face {
+    font-family: Roboto-Regular;
+    src: url('../font/Roboto-Regular.ttf');
+}
 
 section.has-dark-background,
 section.has-dark-background h1,
@@ -15,7 +18,7 @@ section.has-dark-background h6 {
 /* /_ GLOBAL STYLES _/ */
 :root {
     --r-background-color: #fff;
-    --r-main-font: "Helvetica Neue", Arial, sans-serif;
+    --r-main-font: "Helvetica Neue", Open Sans, Arial, sans-serif;
     --r-main-font-size: 36px;
     --r-main-color: #222;
     --r-block-margin: 20px;
@@ -79,9 +82,7 @@ font-weight: inherit;
 .reveal h1,
 .reveal h2,
 .reveal h3,
-.reveal h4,
-.reveal h5,
-.reveal h6 {
+.reveal h4 {
     margin: var(--r-heading-margin);
     color: var(--r-heading-color);
     font-family: var(--r-heading-font);

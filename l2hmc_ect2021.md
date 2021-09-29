@@ -8,7 +8,7 @@ highlightTheme: github
 <!-- <h2 class="r-fit-text">Training Topological Samplers</h2> -->
 ## <h2 class="r-fit-text">Training Topological Samplers</h2>
 ### for Lattice Gauge Theories
-### <div id="bright">[**Sam Foreman**](mailto://foremans@anl.gov)</div>
+### <div id="blue">[**Sam Foreman**](mailto://foremans@anl.gov)</div>
 ##### 09/29/2021
 
 [<img align="left" width=10% src="assets/github.svg">](https://github.com/saforem2/l2hmc-qcd)
@@ -19,6 +19,13 @@ highlightTheme: github
 # Generating Gauge Configurations
 
 - In order to calculate physical quantities of interest, we 
+
+---
+
+## HMC: Leapfrog Integrator
+
+- The ability to efficiently sample from complicated sampling from complicated distributions is a widely studied 
+<img align="center" width=100% src="assets/single_chain.svg">
 
 ---
 
@@ -46,70 +53,95 @@ highlightTheme: github
 
 ## Hamiltonian Monte Carlo (HMC)
 
-<div style="text-align:left;">
+<span style="text-align:left;">
 
-- **Momentum**: $v \sim \mathcal{N}(0, \mathbb{1})$ distributed independently of $x$
+- Introduce **momentum** <span id="blue">$v \sim \mathcal{N}(0,
+  \mathbb{1})$</span> distributed independently of $x$
 
-- Our target density is then:
-  $$ p(x, v) = p(x) \cdot p(v) = e^{-\beta S(x)}\cdot e^{-v^{T}v / 2} = e^{-H(x, v)}$$
+- The joint target density is then:
+  $ p(x, v) = p(x) \cdot p(v) = e^{-\beta S(x)}\cdot e^{-v^{T}v / 2} =
+  e^{-H(x, v)}$
 
-- We can evolve the joint $\xi = (x, v)$ system using **Hamiltons equations** along $H=\text{const.}:$
+- We can evolve the joint $\xi = (x, v)$ system using **Hamiltons equations**
   <div id="note" style="max-width:50%;padding:2px;text-align:center;">
   <div id="brightred">
 
-  $ \dot{x} = \frac{\partial H}{\partial v},\quad \dot{v} = -\frac{\partial H}{\partial x}$
+  $ \dot{x} = \frac{\partial H}{\partial v},\quad \dot{v} = -\frac{\partial
+  H}{\partial x}$
 
   </div>
   </div>
 
-</div>
+  along $H=\text{const.}$ from $(x_{0}, v_{0})\rightarrow (x^{\ast}, v^{\ast})$
+
+</span>
 
 ---
 
-## Integrate Hamilton's equations
+## Leapfrog Integrator
 
-<div id="note" style="max-width:40%;padding:2px;font-size:0.6em;">
-<div id="brightred">$$\dot{x}=\frac{\partial H}{\partial v},\quad \dot{v} = -\frac{\partial H}{\partial x}$$</div>
+<div style="text-align:left;">
+
+<div style="font-size:0.65em">
+
+- <div id="note" style="padding:5px;">
+Goal: Integrate Hamilton's eqs:
+$(\dot x, \dot v) =
+\left(\frac{\partial H}{\partial{v}}, \frac{\partial
+H}{\partial{x}}\right)$
+
+</div>
 </div>
 
-<div style="font-size:0.8em;line-height:1.25;">
+<div style="font-size:0.65em;line-height:1.2;">
 
-<!-- Starting from $x_0$, we integrate along a _trajectory_ from $(x_{0}, v_{0})$ to $(x', v') -->
-<!-- We can construct a **trajectory** of length $N_{\mathrm{LF}}$ leapfrog steps by: -->
 1. Starting from $x_{0}$, resample the momentum $v_{0}\sim\mathcal{N}(0,
-   \mathbb{1})$ and construct initial state: $\xi_{0} \equiv (x_{0}, v_{0})$
-2. For $i = 1, 2,\ldots, N_{\mathrm{LF}}$:
-   - $\xi_{i}=(x_{i}, v_{i})\rightarrow\xi_{i+1}\rightarrow\cdots\rightarrow \xi_{N_{\mathrm{LF}}-1} \rightarrow \xi_{N_{\mathrm{LF}}} = \xi'$
-3. At the end of the trajectory, accept or reject the _proposal configuration_ $\xi'=\xi_{N_{\mathrm{LF}}} = (x', v')$ with probability $A(\xi'|\xi)$
+\mathbb{1})$ and construct initial state: $\xi_{0} \equiv (x_{0}, v_{0})$
 
-<div id="left" style="font-size:0.8em;margin-top: 20px;">
+2. Integrate along a trajectory of $N_{\mathrm{LF}}$ leapfrog steps. For $i =
+1, 2,\ldots, N_{\mathrm{LF}}-1$:
+<div id="note" style="font-size:0.9em;padding:5px;text-align:center;width:auto;">
+$($<span id="brightpink">$x_{i}$</span>$, v_{i})=\xi_{i}\rightarrow\xi':=\xi_{i+1}\rightarrow\cdots\rightarrow
+\xi_{N_{\mathrm{LF}}-1} \rightarrow \xi_{N_{\mathrm{LF}}} = \xi^{\ast}= \,($<span id="blue">$x^{\ast}$</span>$,
+v^{\ast})$
+  </div>
 
-<div id="note" style="margin:auto; margin-left:70px;margin-right: -60px;text-align:left; float: left; padding:10px; line-height:1.5;">
+3. At the end of the trajectory, accept or reject the <i>proposal configuration</i>
+$\xi^{\ast}=\xi_{N_{\mathrm{LF}}} = (x^{\ast}, v^{\ast})$ with probability $A(\xi^{\ast}|\xi)$
 
-### <u><b>Leapfrog Step:</b></u>
-<ol style="text-align: left; padding-right: 20px;margin-top:-10px;">
-<span id="bright"><li> $\,\, x'\leftarrow x + \varepsilon \tilde{v}$</li> </span>
-<li> $\,\, \tilde{v}\leftarrow v - \frac{\varepsilon}{2}\cdot \partial_{x} S(x)$</li>
-<li> $\,\, v' \leftarrow \tilde{v} - \frac{\varepsilon}{2}\cdot \partial_{x} S(x')$</li>
+</div>
+
+<div style="align: center;">
+<div id="left" style="font-size:0.7em;">
+<!-- <div style="font-size:0.7em; max-width:40%"> -->
+
+<div id="note" style="float:right; text-align:left; padding:10px; line-height:1.5;">
+
+#### <u><b>Leapfrog Step:</b></u> 
+<ol style="text-align: left;margin-top:-10px;">
+<li> $\,\,\,\tilde v\,\leftarrow v - \frac{\varepsilon}{2}\partial_{x} S(x)$</li>
+<li> $\,\, x'\longleftarrow x + \varepsilon\, \tilde v$</li>
+<li> $\,\,v' \leftarrow \tilde v - \frac{\varepsilon}{2}\partial_{x} S(x')$</li>
 
 </div>
 
 </div>
 
-<div id="right" style="font-size:0.8em;margin-top: 20px;">
+<div id="right" style="font-size:0.7em;">
 
-<div id="note" style="margin:auto; padding:10px; text-align:left; float: right; border:none;line-height:1.5;">
+<div id="note" style="text-align:left; padding:10px; float: right; border:none;line-height:1.2;">
 
-### <u><b>Accept / Reject:</b></u>
-<div style="padding-left:10px; margin-top:-10px;line-height:1.5;">
+#### <u><b>Accept / Reject:</b></u>
+<div style="padding-left:10px; margin-top:-10px;">
 
-<div id="bright">
-$x_{i+1}\leftarrow\begin{cases}
-x'\text{ w/ prob. } A(\xi'|\xi),\\
-x_{i} \text{ w/ prob. }1 - A(\xi'|\xi)
+<span id="blue" style="color:var(--r-main-color);">
+$x_{\mathrm{new}}\leftarrow\begin{cases}
+\color{#228BE6}{x^{\ast}\text{ w/ prob. } A(\xi^{\ast}|\xi)},\\
+\color{#F92672}{x_{i}} \text{ w/ prob. }1 - A(\xi^{\ast}|\xi),
 \end{cases}$
+</span>
+$A(\xi^{\ast}|\xi)=\min\left\{1,\frac{p(\xi^{\ast})}{p(\xi)} \left|\frac{\partial\xi^{\ast}}{\partial\xi}\right|\right\}$
 </div>
-and  $A(\xi'|\xi)=\min\left\{1,\frac{p(\xi')}{p(\xi)}\left|\frac{\partial\xi'}{\partial\xi}\right|\right\}$
 
 </div>
 </div>
@@ -118,6 +150,18 @@ and  $A(\xi'|\xi)=\min\left\{1,\frac{p(\xi')}{p(\xi)}\left|\frac{\partial\xi'}{\
 </div>
 
 ---
+
+## HMC: Leapfrog Integrator
+
+<img align="center" width=100% src="assets/hmc-crop.svg">
+
+---
+
+<section data-background-iframe="https://chi-feng.github.io/mcmc-demo/app.html"
+          data-background-interactive>
+
+---
+
 ## Hamiltonian Monte Carlo (HMC)
 
 <div style="font-size: 0.75em;">
@@ -134,17 +178,25 @@ $$ p(x, v) = p(x)\cdot p(v) = e^{-\beta S(x)}\cdot e^{-v^{T}v/2} $$
 
 ---
 
-## Hamiltonian Monte Carlo (HMC)
+## Generalizing HMC
 
-<!-- .slide: data-background="./assets/l2hmc/svgs/l2hmc3.svg" -->
-<!-- ![](./assets/l2hmc/svgs/l2hmc3.svg) -->
+- **Require:**
+   - reversibility: $p(a\rightarrow b) = p(b\rightarrow a)$
+   - ergodicity 
+
 
 ---
 
 ## Generalizing HMC
 
-- Introduce persistent direction $d\sim\mathcal{U}(+, -)$ (_forward_,
-  _backward_)
+- <span id="note" style="padding-left: 10px; max-width:70%; text-align: left; padding-top: 5px; padding-bottom: 6px;">
+  	<b><u>Goal</u></b>: Generate proposal configuration 
+  </span>
+
+- Introduce persistent direction $d\sim\mathcal{U}(+, -)$ 
+  - _forward_ (+) / _backward_ (-).
+- **Target Distribution**: $p(\xi)=p(x)\cdot p(v)\cdot p(d)$
+- **k^{th} Leapfrog Layer**:
 
 ---
 
@@ -152,31 +204,15 @@ $$ p(x, v) = p(x)\cdot p(v) = e^{-\beta S(x)}\cdot e^{-v^{T}v/2} $$
 
 ---
 
-![](assets/l2hmc/svgs/l2hmc5.svg)
+<!-- .slide: data-background="assets/l2hmc/svgs/l2hmc5.svg" -->
 
 ---
 
-![](assets/l2hmc/svgs/l2hmc6.svg)
+<!-- .slide: data-background="assets/l2hmc/svgs/l2hmc6.svg" -->
 
 ---
 
-![](assets/l2hmc/svgs/l2hmc7.svg)
-
----
-
-## Hamiltonian Monte Carlo (HMC)
-
-![](assets/hmc-crop.svg)
-
----
-
-### Networks
-
-<div style="max-width=99%">
-
-![](assets/net_fns.svg)
-
-</div>
+<!-- .slide: data-background="assets/l2hmc/svgs/l2hmc7.svg" -->
 
 ---
 	
@@ -209,7 +245,7 @@ $$ p(x, v) = p(x)\cdot p(v) = e^{-\beta S(x)}\cdot e^{-v^{T}v/2} $$
 }
 
 .reveal {
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: var(--r-main-font), sans-serif;
     font-size: var(--r-main-font-size);
     font-weight: normal;
     color: var(--r-main-color);
@@ -219,7 +255,7 @@ $$ p(x, v) = p(x)\cdot p(v) = e^{-\beta S(x)}\cdot e^{-v^{T}v/2} $$
 .reveal h2,
 .reveal h3,
 .reveal h4 {
-    font-family: 'Open Sans', 'Roboto', Arial, Helvetica, sans-serif;
+    font-family: var(--r-heading-font), 'Roboto', Arial, Helvetica, sans-serif;
     margin: var(--r-heading-margin);
     color: var(--r-heading-color);
     font-family: var(--r-heading-font);
@@ -248,11 +284,11 @@ $$ p(x, v) = p(x)\cdot p(v) = e^{-\beta S(x)}\cdot e^{-v^{T}v/2} $$
 
 .reveal h4 {
     font-size: var(--r-heading4-size);
-    color: #61D836;
+    color: #333333;
 }
 
 #left {
-  margin: 0 0 15 10;
+  margin: 0 0 5px 5px;
   text-align: left;
   float: left;
   z-index: -10;
@@ -261,7 +297,7 @@ $$ p(x, v) = p(x)\cdot p(v) = e^{-\beta S(x)}\cdot e^{-v^{T}v/2} $$
 }
 
 #right {
-  margin: 0 0 15 0;
+  margin: 0 0 5px 0;
   float: right;
   max-width: 48%;
   text-align: left;
@@ -280,12 +316,24 @@ $$ p(x, v) = p(x)\cdot p(v) = e^{-\beta S(x)}\cdot e^{-v^{T}v/2} $$
         color: var(--r-link-color-hover);
     }
 }
+#blue {
+    color: #228BE6;
+}
 #bright {
     color: #00A2FF;
 }
+#green {
+    color: #009051;
+}
+#pink {
+    color: #E64980;
+}
+#brightpink {
+    color: #F92672;
+}
 
 #brightred {
-    color: #FF5252;
+    color: #FA5252;
 }
 
 #noteinverse {

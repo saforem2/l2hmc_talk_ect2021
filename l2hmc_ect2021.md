@@ -4,6 +4,14 @@ theme: simple
 width: 960
 height: 700
 highlightTheme: github
+output:
+  revealjs::revealjs_presentation:
+    self_contained: false
+    reveal_plugins: ["chalkboard"]
+    reveal_options:
+      chalkboard:
+        theme: whiteboard
+        toggleNotesButton: false
 ---
 
 <!-- .slide: data-background="#1c1c1c" -->
@@ -18,9 +26,28 @@ highlightTheme: github
 
 ---
 
-# Generating Gauge Configurations
+# Motivation
 
-- In order to calculate physical quantities of interest, we 
+- Want to calculate observables
+  $$ \langle \mathcal{O}\rangle\propto\int\left[\mathcal{D}x\right]\mathcal{O}(x)e^{-S(x)} $$
+- If we had _independent configurations_, we could approximate the integral as
+  $$ \langle\mathcal{O}\rangle\simeq\frac{1}{N}\sum_{n=1}^{N}\mathcal{O}(x_{n})\Rightarrow \sigma^{2}=\frac{1}{N}\text{Var}\left[\mathcal{O}(x)\right] $$
+
+---
+
+## Motivation
+
+- For independent samples: 
+  <span style="font-size:0.6em;">
+  $$\langle \mathcal{O}\rangle \propto\int\left[\mathcal{D}x\right]\mathcal{O}(x)e^{-S(x)}
+  \simeq\frac{1}{N}\sum_{n=1}^{N}\mathcal{O}(x_{n})\Rightarrow
+  \sigma^{2}=\frac{1}{N}\text{Var}\left[\mathcal{O}(x\right)]$$
+  </span>
+- Accounting for <span id="blue">autocorrelations</span>
+  $$ \sigma^{2}=\frac{\color{#228BE6}{\tau_{\mathrm{int}}^{\mathcal{O}}}}{N}\text{Var}\left[\mathcal{O}(x)\right] $$
+- <span id="blue">$\tau_{\mathrm{int}}^{\mathcal{O}}$</span> is known to scale <span
+  id="red">exponentially</span> as we approach physical lattice spacing.
+
 
 ---
 
@@ -103,7 +130,7 @@ H}{\partial{x}}\right)$
 2. Integrate along a trajectory of $N_{\mathrm{LF}}$ leapfrog steps. For $i =
 1, 2,\ldots, N_{\mathrm{LF}}-1$:
 <div id="note" style="font-size:0.9em;padding:5px;text-align:center;width:auto;">
-$($<span id="brightpink">$x_{i}$</span>$, v_{i})=\xi_{i}\rightarrow\xi':=\xi_{i+1}\rightarrow\cdots\rightarrow
+$($<span id="pink">$x_{i}$</span>$, v_{i})=\xi_{i}\rightarrow\xi':=\xi_{i+1}\rightarrow\cdots\rightarrow
 \xi_{N_{\mathrm{LF}}-1} \rightarrow \xi_{N_{\mathrm{LF}}} = \xi^{\ast}= \,($<span id="blue">$x^{\ast}$</span>$,
 v^{\ast})$
   </div>
@@ -186,14 +213,20 @@ $\xi^{\ast}=\xi_{N_{\mathrm{LF}}} = (x^{\ast}, v^{\ast})$ with probability $A(\x
 
 <div style="text-align:left;">
 
+<!--
 - <span id="note" style="padding-left: 10px; z-index:10; font-size:0.75em; max-width:90%; text-align: left; padding-top: 5px; padding-bottom: 6px;">
   	<b><u>Goal</u></b>: Generate independent proposal configurations to efficiently sample the topological charge $Q$
   </span>
+-->
 
 - **Main idea**:
-  - Introduce six auxiliary functions <span id="pink">$(s_x, t_x, q_x)$</span> and
+  - Introduce six auxiliary functions <span id="red">$(s_x, t_x, q_x)$</span> and
   <span id="blue">$(s_v, t_v, q_v)$</span> into the leapfrog updates
   - Each of these functions are parameterized by <span id="green">weights $\theta$</span> in a neural network
+- **Require**:
+  - reversibility: $p(a\rightarrow b) = p(b\rightarrow a)$
+  - detailed balance: $p(x') K(x|x') = p(x) K(x'|x)$
+  - ergodicity
 
 </div>
 
@@ -272,7 +305,7 @@ font-size:0.6em;background-color:rgba(127,203,233,0.2); padding:3px;">
 
 - $k^{th}$-Leapfrog Layer: `\(\xi_{k} = (x_{k}, v_{k}, \pm)\rightarrow (x''_{k}, v''_{k}, \pm)\)`
 <div id="note" style="font-size:0.9em;padding:1.5px;text-align:center;max-width:90%;">
-$($<span id="brightpink">$x_{i}$</span>$, v_{i})=\xi_{i}\rightarrow\xi':=\xi_{i+1}\rightarrow\cdots\rightarrow
+$($<span id="pink">$x_{i}$</span>$, v_{i})=\xi_{i}\rightarrow\xi':=\xi_{i+1}\rightarrow\cdots\rightarrow
 \xi_{N_{\mathrm{LF}}-1} \rightarrow \xi_{N_{\mathrm{LF}}} = \xi^{\ast}= \,($<span id="blue">$x^{\ast}$</span>$,
 v^{\ast})$
 </div>
@@ -301,6 +334,8 @@ updating $v$ and $x$ respectively (bottom);
 <img src="assets/network_functions.svg">
 
 ---
+
+<section id="gmm">
 
 ## Toy Example: GMM $\in \mathbb{R}^{2}$
 
@@ -332,7 +367,7 @@ updating $v$ and $x$ respectively (bottom);
 
 **Training Algorithm**
 
-<img src="assets/training_alg.svg" width=60% align="center">
+<img src="assets/training_alg.svg" width=90% align="center">
 
 ---
 ## Annealing Schedule
@@ -373,37 +408,111 @@ with $x_{\mu}(n)\in[-\pi,\pi]$
 with $x_{P}= x_{\mu}(n) + x_{\nu}(n+\hat{\mu})-x_{\mu}(n+\hat{\nu})-x_{\nu}(n)$
 
 - <b>Topological Charge</b>:
-  - <span id="note" style="padding:5px;font-size:0.9em;background:#D0F3D5;margin-bottom:10px;">`\(Q_{\mathbb{R}} =
-  \frac{1}{2\pi}\sum_{P} \sin x_{P}\in\mathbb{R}\)` ✅</span>
+  - <span id="note" style="padding:5px;font-size:0.9em;background:#D0F3D5;margin-bottom:10px;">$Q_{\mathbb{R}} =
+  \frac{1}{2\pi}\sum_{P} \sin x_{P}\in\mathbb{R}$ ✅</span>
   <span style="font-size:0.5em;">(continuous, differentiable)</span>
 
-  - <span id="note" style="padding:5px;font-size:0.9em;background:#F7C2CC;">`\(Q_{\mathbb{Z}} =
+  - <span id="note" style="padding:5px;font-size:0.9em;background:#F7C2CC;">$Q_{\mathbb{Z}} =
   \frac{1}{2\pi}\sum_{P} \left\lfloor
-  x_{P}\right\rfloor\in\mathbb{Z}\,\,\)` ❌</span>
+  x_{P}\right\rfloor\in\mathbb{Z}$ ❌</span>
   <span style="font-size:0.5em;">(discrete, hard to work with)</span>
 
-  here `\(\left\lfloor x_{P}\right\rfloor =
-  x_{P}-2\pi\left\lfloor\frac{x_{P}+\pi}{2\pi}\right\rfloor\)`
+  here $\left\lfloor x_{P}\right\rfloor =
+  x_{P}-2\pi\left\lfloor\frac{x_{P}+\pi}{2\pi}\right\rfloor$
 
 </div>
 
 <div id="right">
+
 <img src="assets/plaq_tikz.svg" width=75% align="right">
+
+</div>
+---
+
+# Loss Function
+
+<div style="font-size:0.9em;">
+
+- Maximize the _expected squared charge difference_ (tunneling rate):
+  <div id="note" style="padding:1px;">
+  \[\begin{equation}
+  \mathcal{L}(\theta) = \mathbb{E}_{p(\xi)} \left[-\delta Q_{\mathbb{R}}^{2}(\xi',\xi)\cdot A(\xi'|\xi)\right]
+  \end{equation}\]
+  </div>
+- Where 
+  $$\delta Q_{\mathbb{R}}^{2}(\xi',\xi)=\left(Q_{\mathbb{R}}(x') - Q_{\mathbb{R}}(x)\right)^{2}$$
+- And 
+  $$ A(\xi'|\xi) = \min\left(1, \frac{p(\xi')}{p(\xi)}\left|\frac{\partial \xi'}{\partial \xi^{T}}\right|\right\)$$
+
 </div>
 
+---
+
+## Comparison
+
+<img src="assets/charge_histories.svg" width=80%>
 
 ---
 
-## Non-Compact Projection
+<img src="assets/autocorr_old.svg" width=45% align=center>
+<img src="assets/autocorr_new.svg" width=45%" align=center>
 
-- Project $[-\pi, \pi]$ onto $\mathbb{R}$ using a transformation $z = g(x), g:
-  [-\pi, \pi]\rightarrow\mathbb{R}$
+---
+
+## $\tau_{\mathrm{int}}^{Q_{\mathbb{Z}}}$ at $\beta = 4$
+<img src="assets/tint_beta4.svg" width=80%>
+
+---
+
+## Effective Action: $S_{\mathrm{eff}}(x)$
+<img src="assets/plaqsf_beta.svg" width=80%>
+
+---
+
+<img src="assets/ridgeplots.svg" width=80%>
+
+---
+
+## Interpretation
+
+<img src="assets/plaqsf_ridgeplot.svg" width=45% align=center>
+<img src="assets/Hf_ridgeplot.svg" width=45%" align=center>
+<!-- <img src="assets/plaqsb_ridgeplot.svg" width=34% align=center>
+<img src="assets/Hb_ridgeplot.svg" width=34%" align=center> -->
+
+---
+
+## Non-Compact Projection 
+<small>[arXiv:2002.02428](https://arxiv.org/abs/2002.02428)</small>
+
+<div style="font-size:0.8em;">
+
+- Project $x \in[-\pi, \pi]$ onto $\mathbb{R}$ using a transformation $z = g(x)$:
   $$ z = \tan\left(\frac{x}{2}\right) $$
-- Perform the update in $\mathbb{R}$
+- Perform the update in $\mathbb{R}$:
   $$ z' = m^{t}\odot z + \bar{m}^{t}\odot \left[\alpha z + \beta\right]$$
+- Project back to $[-\pi, \pi]$ using $x = g^{-1}(z)$:
+  $$ x = 2 \tan^{-1}(z) $$
+
+</div>
 
 ---
 
+# Non-Compact Projection
+
+- Combine into a single update:
+  $$ x' = \color{#228BE6}{m^{t}}\odot x +
+  \color{#FA5252}{\bar{m}^{t}}\odot\left[2\tan^{-1}\left(\alpha\tan\left(\frac{x}{2}\right)\right)+\beta\right]
+  $$
+- With corresponding Jacobian:
+  $$ \frac{\partial x'}{\partial x} = \frac{\exp(\varepsilon s_{x})}{\cos^{2}(x/2)+exp(2\varepsilon s_{x})\sin(x/2)} $$
+
+
+</div>
+
+---
+
+---
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto:wght@500&family=Source+Sans+Pro&display=swap');
 
@@ -510,10 +619,10 @@ with $x_{P}= x_{\mu}(n) + x_{\nu}(n+\hat{\mu})-x_{\mu}(n+\hat{\nu})-x_{\nu}(n)$
 #green {
     color: #009051;
 }
-#pink {
+#lighpink {
     color: #E64980;
 }
-#brightpink {
+#pink {
     color: #F92672;
 }
 

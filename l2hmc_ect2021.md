@@ -230,9 +230,11 @@ H}{\partial{x}}\right)$
 -->
 
 - **Main idea**:
-  - Introduce six auxiliary functions <span id="red">$(s_x, t_x, q_x)$</span> and
-  <span id="blue">$(s_v, t_v, q_v)$</span> into the leapfrog updates
+  - Introduce six auxiliary functions <span id="red">$(s_x, t_x, q_x)$</span>
+    (collectively, <span id="red">$\Lambda^{\pm}$</span>) and <span id="blue">$(s_v, t_v,
+    q_v)$</span> (collectively, <span id="blue">$\Gamma^{\pm}$</span>) into the leapfrog updates
   - Each of these functions are parameterized by <span id="green">weights $\theta$</span> in a neural network
+    - Based on `RealNVP` [arXiv:1605.08803](https://arxiv.org/abs/1605.08803)
 - **Require**:
   - reversibility: $p(a\rightarrow b) = p(b\rightarrow a)$
   - detailed balance: $p(x') K(x|x') = p(x) K(x'|x)$
@@ -547,6 +549,8 @@ to tunnel between isolated sectors.
 
 ### References:
  - [Link to slides](https://bit.ly/l2hmc-ect2021)
+ - [Link to github](https://github.com/saforem2/l2hmc-qcd)
+ - [reach out!](mailto://foremans@anl.gov)
  - [Link to HMC demo](https://chi-feng.github.io/mcmc-demo/app.html)
  - [arXiv:2105.03418](https://arxiv.org/abs/2002.02428)
  - [arXiv:2002.02428](https://arxiv.org/abs/2002.02428)

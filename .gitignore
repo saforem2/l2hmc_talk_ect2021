@@ -4,3 +4,7 @@ old
 *.pdf
 *.ttf
 *.woff
+asests/
+assets
+.sass-cache/
+custom/fonts

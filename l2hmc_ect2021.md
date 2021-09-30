@@ -19,7 +19,7 @@ output:
 ## <h2 class="r-fit-text">Training Topological Samplers</h2>
 ## for Lattice Gauge Theories
 
-### <span id="blue">[**Sam Foreman**](mailto://foremans@anl.gov)</div>
+### <span id="blue">[**Sam Foreman**](https://www.samforeman.me)</div>
 
 <small>09/30/2021</small></span>
 
@@ -502,6 +502,8 @@ to tunnel between isolated sectors.
 - Both `pytorch` and `tensorflow` implementations with support for distributed training, automatic checkpointing, etc.
 
 - Generic interface, easily extensible
+
+- <b>Work in progress</b> scaling up to 2D, 4D $SU(3)$
 
 ---
 

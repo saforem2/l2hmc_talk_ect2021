@@ -19,9 +19,16 @@
 <!-- .slide: data-background="#1c1c1c" -->
 <!-- <h2 class="r-fit-text">Training Topological Samplers</h2> -->
 ## <h2 class="r-fit-text">Training Topological Samplers</h2>
-### for Lattice Gauge Theories
-### <div id="blue">[**Sam Foreman**](mailto://foremans@anl.gov)</div>
-##### 09/29/2021
+## for Lattice Gauge Theories
+
+### <span id="blue">[**Sam Foreman**](mailto://foremans@anl.gov)</div>
+
+<small>09/30/2021</small></span>
+
+<small>Machine Learning for HEP, on and off the Lattice @ ECT* - Trento</small>
+
+[`bit.ly/l2hmc-ect2021`](https://bit.ly/l2hmc-ect2021)
+
 
 [<img align="left" width=10% src="assets/github.svg">](https://github.com/saforem2/l2hmc-qcd)
 [<img align="right" width=30% src="assets/Argonne_cmyk_white.svg">](https://alcf.anl.gov)
@@ -47,10 +54,15 @@
   id="red">exponentially</span> as we approach physical lattice spacing.
 
 </script></section><section  data-markdown><script type="text/template">
-## HMC: Leapfrog Integrator
+## Motivation
 
-- The ability to efficiently sample from complicated sampling from complicated distributions is a widely studied 
-<img align="center" width=100% src="assets/single_chain.svg">
+<!-- - The ability to efficiently sample from complicated sampling from complicated distributions is a widely studied  -->
+- Generating independent configurations is currently a major bottleneck for
+  lattice QCD.
+- As the lattice spacing $a\rightarrow 0$ (or equivalently, $\beta \rightarrow \infty$),
+  configurations get stuck in sectors of fixed gauge topology. 
+  - Causes $\tau_{\mathrm{int}}$ to grow exponentially
+  <img align="center" width=100% src="assets/single_chain.svg">
 </script></section><section  data-markdown><script type="text/template">
 ## <div style="color: #3B4CC0;">Critical Slowing Down</div>
 
@@ -118,23 +130,23 @@ H}{\partial{x}}\right)$
 \mathbb{1})$ and construct initial state: $\xi_{0} \equiv (x_{0}, v_{0})$
 
 2. Integrate along a trajectory of $N_{\mathrm{LF}}$ leapfrog steps. For $i =
-1, 2,\ldots, N_{\mathrm{LF}}-1$:
-<div id="note" style="font-size:0.9em;padding:5px;text-align:center;width:auto;">
-$($<span id="pink">$x_{i}$</span>$, v_{i})=\xi_{i}\rightarrow\xi':=\xi_{i+1}\rightarrow\cdots\rightarrow
-\xi_{N_{\mathrm{LF}}-1} \rightarrow \xi_{N_{\mathrm{LF}}} = \xi^{\ast}= \,($<span id="blue">$x^{\ast}$</span>$,
-v^{\ast})$
-  </div>
+   1, 2,\ldots, N_{\mathrm{LF}}-1$:
+   <div id="note" style="font-size:0.9em;padding:5px;text-align:center;width:auto;">
+   $($<span id="pink">$x_{i}$</span>$, v_{i})=\xi_{i}\rightarrow\xi':=\xi_{i+1}\rightarrow\cdots\rightarrow
+   \xi_{N_{\mathrm{LF}}-1} \rightarrow \xi_{N_{\mathrm{LF}}} = \xi^{\ast}= \,($<span id="blue">$x^{\ast}$</span>$,
+   v^{\ast})$
+   </div>
 
 3. At the end of the trajectory, accept or reject the <i>proposal configuration</i>
-$\xi^{\ast}=\xi_{N_{\mathrm{LF}}} = (x^{\ast}, v^{\ast})$ with probability $A(\xi^{\ast}|\xi)$
+   $\xi^{\ast}=\xi_{N_{\mathrm{LF}}} = (x^{\ast}, v^{\ast})$ with probability $A(\xi^{\ast}|\xi)$
 
 </div>
 
-<div style="align: center;">
+<div style="align: left;">
 <div id="left" style="font-size:0.6em;">
 <!-- <div style="font-size:0.7em; max-width:40%"> -->
 
-<div id="note" style="float:right;margin-left:10px;text-align:left; padding:5px; line-height:1.5">
+<div id="note" style="float:left;margin-left:40px;text-align:left; padding:5px; line-height:1.5">
 
 #### <u><b>Leapfrog Step:</b></u> 
   <ol style="text-align: left;margin-top:-10px;">
@@ -148,7 +160,7 @@ $\xi^{\ast}=\xi_{N_{\mathrm{LF}}} = (x^{\ast}, v^{\ast})$ with probability $A(\x
 
 <div id="right" style="font-size:0.6em;">
 
-<div id="note" style="float:right; text-align:left; padding:5px; border:none;line-height:1.2;">
+<div id="note" style="float:left; text-align:left; padding:2px; border:none;line-height:1.2;">
 
 #### <u><b>Accept / Reject:</b></u>
   <div style="padding-left:10px; margin-top:-10px;">
@@ -178,16 +190,14 @@ $\xi^{\ast}=\xi_{N_{\mathrm{LF}}} = (x^{\ast}, v^{\ast})$ with probability $A(\x
 <div style="text-align:left;font-size:0.8em;">
 
 - Energy levels selected randomly $\rightarrow$ slow mixing!
-
-- Cannot easily traeverse low-density zones
-
+- Cannot easily traverse low-density zones
 - What do we want in a good sampler?
   - Fast mixing (small autocorrelations) 
   - Fast burn-in (quick convergence)
   - Ability to mix across energy levels and isolated modes
 
-<img src="assets/hmc_traj_eps05.svg" width=45% align="left">
-<img src="assets/hmc_traj_eps025.svg" width=45% align="right">
+<img src="assets/hmc_traj_eps05.svg" width=49% align=center>
+<img src="assets/hmc_traj_eps025.svg" width=49% align=center>
 
 </div>
 </script></section><section  data-markdown><script type="text/template">
@@ -212,25 +222,12 @@ $\xi^{\ast}=\xi_{N_{\mathrm{LF}}} = (x^{\ast}, v^{\ast})$ with probability $A(\x
 
 </div>
 </script></section><section  data-markdown><script type="text/template">
-## Generalizing HMC
-
-<div style="text-align:left;font-size:0.8em;">
-
-- **Require**:
-  - reversibility: <span id="pink">$p(a\rightarrow b) = p(b\rightarrow a)$</span>
-  - detailed balance: <span id="blue">$p(x') K(x|x') = p(x) K(x'|x)$</span>
-  - ergodicity
-
-- Introduce persistent direction $d\sim\mathcal{U}(+, -)$ (independent of both $x$ and $v$)
-  - _forward_ (+) / _backward_ (-).
-- **Target Distribution**: $p(\xi)=p(x)\cdot p(v)\cdot p(d)$
-
-</div></script></section><section  data-markdown><script type="text/template">
 ## Generalizing the Leapfrog Update
 
 <div style="float:left; max-width:44%; font-size:0.9em; text-align: left;">
 
 <span id="red"><b><u>L2HMC Update</u></b></span>: `\(\xi_{k}\rightarrow\xi''_{k}\)`
+<small>Note that we split the $x$ update into two complementary sub-updates in order to preserve reversibility.</small>
 <img src="assets/generalized_leapfrog.svg">
 <!-- <span style="font-size:0.40em;">
 <b>Fig. (a)</b> Update steps for performing a single L2HMC update (left).
@@ -244,18 +241,16 @@ $\xi^{\ast}=\xi_{N_{\mathrm{LF}}} = (x^{\ast}, v^{\ast})$ with probability $A(\x
 <b>Fig. (a)</b> Diagram illustrating the L2HMC leapfrog update</b>
 </span>
 <img src="assets/network.svg" width=90%>
-<span style="font-size:0.50em;">
-Compare with the HMC update
-</span>
+<small>Compare with the HMC update</small>
 
 <div id="note" style="text-align:left; max-width:75%; padding:2px;
 font-size:0.6em;background-color:rgba(127,203,233,0.2); padding:3px;">
 
 #### <u><b>HMC Update:</b></u> 
 <ol style="text-align: left;margin-top:-10px;">
-<li> $\,\,\,\tilde v\,\leftarrow v - \frac{\varepsilon}{2}\partial_{x} S(x)$</li>
-<li> $\,\, x'\longleftarrow x + \varepsilon\, \tilde v$</li>
-<li> $\,\,v' \leftarrow \tilde v - \frac{\varepsilon}{2}\partial_{x} S(x')$</li>
+<li> $\,\,\,v'\,\leftarrow v - \frac{\varepsilon}{2}\partial_{x} S(x)$</li>
+<li> $\,\, x'\longleftarrow x + \varepsilon\, v'$</li>
+<li> $\,\,v'' \leftarrow v' - \frac{\varepsilon}{2}\partial_{x} S(x')$</li>
 </ol>
 
 </div>
@@ -264,8 +259,6 @@ font-size:0.6em;background-color:rgba(127,203,233,0.2); padding:3px;">
 ## Generalizing HMC
 
 <img src="assets/network_iterate.svg" width=85%>
-</script></section><section  data-markdown><script type="text/template">
-<!-- .slide: data-background="assets/network_iterate1.svg" -->
 </script></section><section  data-markdown><script type="text/template">
 ### Leapfrog Layer: Details
 
@@ -277,8 +270,8 @@ font-size:0.6em;background-color:rgba(127,203,233,0.2); padding:3px;">
 
 - $k^{th}$-Leapfrog Layer: `\(\xi_{k} = (x_{k}, v_{k}, \pm)\rightarrow (x''_{k}, v''_{k}, \pm)\)`
 <div id="note" style="font-size:0.9em;padding:1.5px;text-align:center;max-width:90%;">
-$($<span id="pink">$x_{i}$</span>$, v_{i})=\xi_{i}\rightarrow\xi':=\xi_{i+1}\rightarrow\cdots\rightarrow
-\xi_{N_{\mathrm{LF}}-1} \rightarrow \xi_{N_{\mathrm{LF}}} = \xi^{\ast}= \,($<span id="blue">$x^{\ast}$</span>$,
+$(\color{#F92672}{x_{k}}, v_{k})=\xi_{k}\rightarrow\xi':=\xi_{k+1}\rightarrow\cdots\rightarrow
+\xi_{N_{\mathrm{LF}}-1} \rightarrow \xi_{N_{\mathrm{LF}}} = \xi^{\ast}= \,(\color{#228BE6}{x^{\ast}},
 v^{\ast})$
 </div>
 
@@ -307,12 +300,12 @@ updating $v$ and $x$ respectively (bottom);
 
 ## Toy Example: GMM $\in \mathbb{R}^{2}$
 
-<div style="text-align:left; font-size:0.9em;">
+<div style="text-align:left; font-size:0.8em;">
 
 - <div id="note" style="padding:2px;"><b><u>Goal:</u></b> Train our sampler to
   effectively sample from both modes of the target distribution.</div>
 - Maximize <span id="blue">_expected squared jump distance_</span>
-  <div id="note" style="text-align:center;max-width:75%;padding:2px;">
+  <div id="note" style="text-align:center;padding:0.9px;font-size:0.75em;">
   \[\mathcal{L}_{\theta}(\xi', \xi) \equiv
   \color{#228BE6}{\mathbb{E}_{p(\xi)}\left[A(\xi'|\xi)\cdot \delta(\xi',
   \xi)\right]}\]
@@ -320,8 +313,8 @@ updating $v$ and $x$ respectively (bottom);
   where  $\delta(\xi, \xi') ={\lVert x - x'\rVert}^{2}$ is the squared jump
   distance between $x'$ and $x$.
 
-<img src="assets/hmc_traj_eps05.svg" width=45% align="left">
-<img src="assets/hmc_traj_eps025.svg" width=45% align="right">
+<img src="assets/hmc_traj_eps05.svg" width=48% align=center>
+<img src="assets/hmc_traj_eps025.svg" width=48% align=center>
 
 </div>
 </script></section><section  data-markdown><script type="text/template">
@@ -391,40 +384,72 @@ with $x_{P}= x_{\mu}(n) + x_{\nu}(n+\hat{\mu})-x_{\mu}(n+\hat{\nu})-x_{\nu}(n)$
 
 <div style="font-size:0.9em;">
 
-- Maximize the _expected squared charge difference_ (tunneling rate):
+- Maximize the <span id="blue">_expected squared charge difference_ </span>:
   <div id="note" style="padding:1px;">
   \[\begin{equation}
-  \mathcal{L}(\theta) = \mathbb{E}_{p(\xi)} \left[-\delta Q_{\mathbb{R}}^{2}(\xi',\xi)\cdot A(\xi'|\xi)\right]
+  \mathcal{L}(\theta) = \color{#228BE6}{\mathbb{E}_{p(\xi)}}
+  \left[-\color{#FA5252}{{\delta Q}}^{2}_{\color{#FA5252}{\mathbb{R}}}(\xi', \xi)\cdot
+  A(\xi'|\xi)\right]
   \end{equation}\]
   </div>
-- Where 
+- Where $\color{#FA5252}{\delta Q_{\mathbb{R}}}$ is the <span id="red">tunneling rate</span>
   $$\delta Q_{\mathbb{R}}^{2}(\xi',\xi)=\left(Q_{\mathbb{R}}(x') - Q_{\mathbb{R}}(x)\right)^{2}$$
-- And 
+- And $A(\xi'|\xi)$ is probability of accepting the proposal configuration $\xi'$.
   $$ A(\xi'|\xi) = \min\left(1, \frac{p(\xi')}{p(\xi)}\left|\frac{\partial \xi'}{\partial \xi^{T}}\right|\right\)$$
 
 </div>
 </script></section><section  data-markdown><script type="text/template">
-## Comparison
+<div style="text-align: center;font-size:0.5em;">
 
-<img src="assets/charge_histories.svg" width=80%>
-</script></section><section  data-markdown><script type="text/template">
-<img src="assets/autocorr_old.svg" width=45% align=center>
-<img src="assets/autocorr_new.svg" width=45%" align=center>
+<img src="assets/autocorr_new.svg" width=45% align=center>
+<b> Fig (a.)</b>  Comparison of $\tau_{\mathrm{int}}^{Q_{\mathbb{Z}}}$
+
+<b> Fig (b.)</b> Topological charge history $Q_{\mathbb{Z}}$ vs MD time units.
+for both the trained model (red) and HMC (black)
+
+<img src="assets/charge_histories.svg" width=100%>
+
+</div>
 </script></section><section  data-markdown><script type="text/template">
 ## $\tau_{\mathrm{int}}^{Q_{\mathbb{Z}}}$ at $\beta = 4$
-<img src="assets/tint_beta4.svg" width=80%>
+<img src="assets/tint_beta4.svg" width=100%>
 </script></section><section  data-markdown><script type="text/template">
 ## Effective Action: $S_{\mathrm{eff}}(x)$
-<img src="assets/plaqsf_beta.svg" width=80%>
+<img src="assets/plaqsf_beta.svg" width=82%>
 </script></section><section  data-markdown><script type="text/template">
-<img src="assets/ridgeplots.svg" width=80%>
+# Interpretation
+<img src="assets/ridgeplots.svg" width=100%>
+<small>
+<b>(a.)</b> Deviation in the average plaquette (left);
+<b>(b.)</b> Real-valued topological charge (middle);
+<b>(c.)</b> Effective energy (right);
+
+<b>Fig.</b> Illustration of how different observables evolve over a
+single L2HMC trajectory.
+</small>
 </script></section><section  data-markdown><script type="text/template">
 ## Interpretation
 
-<img src="assets/plaqsf_ridgeplot.svg" width=45% align=center>
-<img src="assets/Hf_ridgeplot.svg" width=45%" align=center>
+<img src="assets/plaqsf_ridgeplot.svg" width=48% align=center>
+<img src="assets/Hf_ridgeplot.svg" width=48%" align=center>
+<small><b>Fig.</b> Illustration of how the trained model artificially
+increases the energy towards the middle of the trajectory, allowing the sampler
+to tunnel between isolated sectors.
 <!-- <img src="assets/plaqsb_ridgeplot.svg" width=34% align=center>
 <img src="assets/Hb_ridgeplot.svg" width=34%" align=center> -->
+</script></section><section  data-markdown><script type="text/template">
+# Interpretation
+
+<img src="assets/plaqsf_ridgeplot1.svg" width=48% align=center>
+<img src="assets/Hwf_ridgeplot1.svg" width=46% align=center>
+</script></section><section  data-markdown><script type="text/template">
+## [<img width=10% src="assets/github_black.png" align=center>](https://github.com/saforem2/l2hmc-qcd) [l2hmc-qcd](https://github.com/saforem2/l2hmc-qcd)
+
+- Source code publicly available
+
+- Both `pytorch` and `tensorflow` implementations with support for distributed training, automatic checkpointing, etc.
+
+- Generic interface, easily extensible
 </script></section><section  data-markdown><script type="text/template">
 ## Non-Compact Projection 
 <small>[arXiv:2002.02428](https://arxiv.org/abs/2002.02428)</small>
@@ -451,7 +476,53 @@ with $x_{P}= x_{\mu}(n) + x_{\nu}(n+\hat{\mu})-x_{\mu}(n+\hat{\nu})-x_{\nu}(n)$
 
 
 </div>
-</script></section><section  data-markdown><script type="text/template"></script></section><section  data-markdown><script type="text/template"><style>
+</script></section><section  data-markdown><script type="text/template">
+## Acknowledgements
+
+<div id="left">
+
+### Collaborators:
+ - Xiao-Yong Jin
+ - James C. Osborn
+
+### References:
+ - [Link to slides](https://bit.ly/l2hmc-ect2021)
+ - [Link to HMC demo](https://chi-feng.github.io/mcmc-demo/app.html)
+ - [arXiv:2105.03418](https://arxiv.org/abs/2002.02428)
+ - [arXiv:2002.02428](https://arxiv.org/abs/2002.02428)
+
+
+</div>
+
+<div id="right">
+
+### Huge thank you to:
+ - Yannick Meurice
+ - Norman Christ
+ - Akio Tomiya
+ - Luchang Jin
+ - Chulwoo Jung
+ - Peter Boyle
+ - Taku Izubuchi
+ - Critical Slowing Down group (ECP)
+ - ALCF Staff + Datascience Group
+
+</div>
+
+<small> 
+This research used resources of the Argonne Leadership Computing Facility,
+which is a DOE Office of Science User Facility supported under Contract
+DE-AC02-06CH11357.
+</small>
+</script></section><section  data-markdown><script type="text/template">
+### Network Architectures
+
+<img src="assets/dynamics_xnet0.png"  align=center width=45%>
+</script></section><section  data-markdown><script type="text/template">
+### Network Architectures
+
+<img src="assets/dynamics_vnet.png"  align=center width=36%>
+</script></section><section  data-markdown><script type="text/template"><style>
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto:wght@500&family=Source+Sans+Pro&display=swap');
 
 :root {

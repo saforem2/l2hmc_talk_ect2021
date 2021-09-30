@@ -1,6 +1,8 @@
 ---
 title: "l2hmc-qcd @ ECT 2021"
 theme: simple
+width: 960
+height: 700
 highlightTheme: github
 ---
 
@@ -64,7 +66,7 @@ highlightTheme: github
 
 - We can evolve the joint $\xi = (x, v)$ system using **Hamiltons equations**
   <div id="note" style="max-width:50%;padding:2px;text-align:center;">
-  <div id="brightred">
+  <div id="red">
 
   $ \dot{x} = \frac{\partial H}{\partial v},\quad \dot{v} = -\frac{\partial
   H}{\partial x}$
@@ -112,36 +114,34 @@ $\xi^{\ast}=\xi_{N_{\mathrm{LF}}} = (x^{\ast}, v^{\ast})$ with probability $A(\x
 </div>
 
 <div style="align: center;">
-<div id="left" style="font-size:0.7em;">
+<div id="left" style="font-size:0.6em;">
 <!-- <div style="font-size:0.7em; max-width:40%"> -->
 
-<div id="note" style="float:right; text-align:left; padding:10px; line-height:1.5;">
+<div id="note" style="float:right;margin-left:10px;text-align:left; padding:5px; line-height:1.5">
 
 #### <u><b>Leapfrog Step:</b></u> 
-<ol style="text-align: left;margin-top:-10px;">
-<li> $\,\,\,\tilde v\,\leftarrow v - \frac{\varepsilon}{2}\partial_{x} S(x)$</li>
-<li> $\,\, x'\longleftarrow x + \varepsilon\, \tilde v$</li>
-<li> $\,\,v' \leftarrow \tilde v - \frac{\varepsilon}{2}\partial_{x} S(x')$</li>
+  <ol style="text-align: left;margin-top:-10px;">
+  <li> $\,\,\,\tilde v\,\leftarrow v - \frac{\varepsilon}{2}\partial_{x} S(x)$</li>
+  <li> $\,\, x'\longleftarrow x + \varepsilon\, \tilde v$</li>
+  <li> $\,\,v' \leftarrow \tilde v - \frac{\varepsilon}{2}\partial_{x} S(x')$</li>
 
 </div>
 
 </div>
 
-<div id="right" style="font-size:0.7em;">
+<div id="right" style="font-size:0.6em;">
 
-<div id="note" style="text-align:left; padding:10px; float: right; border:none;line-height:1.2;">
+<div id="note" style="float:right; text-align:left; padding:5px; border:none;line-height:1.2;">
 
 #### <u><b>Accept / Reject:</b></u>
-<div style="padding-left:10px; margin-top:-10px;">
-
-<span id="blue" style="color:var(--r-main-color);">
-$x_{\mathrm{new}}\leftarrow\begin{cases}
-\color{#228BE6}{x^{\ast}\text{ w/ prob. } A(\xi^{\ast}|\xi)},\\
-\color{#F92672}{x_{i}} \text{ w/ prob. }1 - A(\xi^{\ast}|\xi),
-\end{cases}$
-</span>
-$A(\xi^{\ast}|\xi)=\min\left\{1,\frac{p(\xi^{\ast})}{p(\xi)} \left|\frac{\partial\xi^{\ast}}{\partial\xi}\right|\right\}$
-</div>
+  <div style="padding-left:10px; margin-top:-10px;">
+  $x_{\mathrm{new}}\leftarrow\begin{cases}
+  \color{#228BE6}{x^{\ast}}\text{ w/ prob. } A(\xi^{\ast}|\xi),\\
+  \color{#F92672}{x_{i}} \text{ w/ prob. }1 - A(\xi^{\ast}|\xi),
+  \end{cases}$
+  </span>
+  $A(\xi^{\ast}|\xi)=\min\left\{1,\frac{p(\xi^{\ast})}{p(\xi)} \left|\frac{\partial\xi^{\ast}}{\partial\xi}\right|\right\}$
+  </div>
 
 </div>
 </div>
@@ -162,17 +162,21 @@ $A(\xi^{\ast}|\xi)=\min\left\{1,\frac{p(\xi^{\ast})}{p(\xi)} \left|\frac{\partia
 
 ---
 
-## Hamiltonian Monte Carlo (HMC)
+## Issues with HMC
 
-<div style="font-size: 0.75em;">
+<div style="text-align:left;font-size:0.8em;">
 
-- Introduce auxiliary momentum $v \sim \mathcal{N}(0, \mathbb{1})$ distributed
-  independently of $x$.
+- Energy levels selected randomly $\rightarrow$ slow mixing!
 
-- Target distribution becomes:
-$$ p(x, v) = p(x)\cdot p(v) = e^{-\beta S(x)}\cdot e^{-v^{T}v/2} $$
+- Cannot easily traeverse low-density zones
 
-<img align="center" width=75% src="assets/hmc-crop.svg">
+- What do we want in a good sampler?
+  - Fast mixing (small autocorrelations) 
+  - Fast burn-in (quick convergence)
+  - Ability to mix across energy levels and isolated modes
+
+<img src="assets/hmc_traj_eps05.svg" width=45% align="left">
+<img src="assets/hmc_traj_eps025.svg" width=45% align="right">
 
 </div>
 
@@ -180,48 +184,230 @@ $$ p(x, v) = p(x)\cdot p(v) = e^{-\beta S(x)}\cdot e^{-v^{T}v/2} $$
 
 ## Generalizing HMC
 
-- **Require:**
-   - reversibility: $p(a\rightarrow b) = p(b\rightarrow a)$
-   - ergodicity 
+<div style="text-align:left;">
 
+- <span id="note" style="padding-left: 10px; z-index:10; font-size:0.75em; max-width:90%; text-align: left; padding-top: 5px; padding-bottom: 6px;">
+  	<b><u>Goal</u></b>: Generate independent proposal configurations to efficiently sample the topological charge $Q$
+  </span>
+
+- **Main idea**:
+  - Introduce six auxiliary functions <span id="pink">$(s_x, t_x, q_x)$</span> and
+  <span id="blue">$(s_v, t_v, q_v)$</span> into the leapfrog updates
+  - Each of these functions are parameterized by <span id="green">weights $\theta$</span> in a neural network
+
+</div>
 
 ---
 
 ## Generalizing HMC
 
-- <span id="note" style="padding-left: 10px; max-width:70%; text-align: left; padding-top: 5px; padding-bottom: 6px;">
-  	<b><u>Goal</u></b>: Generate proposal configuration 
-  </span>
+<div style="text-align:left;font-size:0.8em;">
 
-- Introduce persistent direction $d\sim\mathcal{U}(+, -)$ 
+- **Require**:
+  - reversibility: <span id="pink">$p(a\rightarrow b) = p(b\rightarrow a)$</span>
+  - detailed balance: <span id="blue">$p(x') K(x|x') = p(x) K(x'|x)$</span>
+  - ergodicity
+
+- Introduce persistent direction $d\sim\mathcal{U}(+, -)$ (independent of both $x$ and $v$)
   - _forward_ (+) / _backward_ (-).
 - **Target Distribution**: $p(\xi)=p(x)\cdot p(v)\cdot p(d)$
-- **k^{th} Leapfrog Layer**:
+
+</div>
+---
+
+## Generalizing the Leapfrog Update
+
+<div style="float:left; max-width:44%; font-size:0.9em; text-align: left;">
+
+<span id="red"><b><u>L2HMC Update</u></b></span>: `\(\xi_{k}\rightarrow\xi''_{k}\)`
+<img src="assets/generalized_leapfrog.svg">
+<!-- <span style="font-size:0.40em;">
+<b>Fig. (a)</b> Update steps for performing a single L2HMC update (left).
+</span> -->
+
+</div>
+
+<div style="float:right; max-width:55%;">
+
+<span style="text-align:left;font-size:0.48em;">
+<b>Fig. (a)</b> Diagram illustrating the L2HMC leapfrog update</b>
+</span>
+<img src="assets/network.svg" width=90%>
+<span style="font-size:0.50em;">
+Compare with the HMC update
+</span>
+
+<div id="note" style="text-align:left; max-width:75%; padding:2px;
+font-size:0.6em;background-color:rgba(127,203,233,0.2); padding:3px;">
+
+#### <u><b>HMC Update:</b></u> 
+<ol style="text-align: left;margin-top:-10px;">
+<li> $\,\,\,\tilde v\,\leftarrow v - \frac{\varepsilon}{2}\partial_{x} S(x)$</li>
+<li> $\,\, x'\longleftarrow x + \varepsilon\, \tilde v$</li>
+<li> $\,\,v' \leftarrow \tilde v - \frac{\varepsilon}{2}\partial_{x} S(x')$</li>
+</ol>
+
+</div>
+</div>
 
 ---
 
-![](assets/l2hmc/svgs/l2hmc4.svg)
+## Generalizing HMC
+
+<img src="assets/network_iterate.svg" width=85%>
 
 ---
 
-<!-- .slide: data-background="assets/l2hmc/svgs/l2hmc5.svg" -->
+<!-- .slide: data-background="assets/network_iterate1.svg" -->
 
 ---
 
-<!-- .slide: data-background="assets/l2hmc/svgs/l2hmc6.svg" -->
+### Leapfrog Layer: Details
+
+<div style="font-size:0.6em; text-align:left;">
+
+- Introduce persistent direction $d\sim\mathcal{U}(+, -)$ (_forward_ / _backward_)
+
+- **Target Distribution**: $p(\xi) = p(x)\cdot p(v)\cdot p(d)$
+
+- $k^{th}$-Leapfrog Layer: `\(\xi_{k} = (x_{k}, v_{k}, \pm)\rightarrow (x''_{k}, v''_{k}, \pm)\)`
+<div id="note" style="font-size:0.9em;padding:1.5px;text-align:center;max-width:90%;">
+$($<span id="brightpink">$x_{i}$</span>$, v_{i})=\xi_{i}\rightarrow\xi':=\xi_{i+1}\rightarrow\cdots\rightarrow
+\xi_{N_{\mathrm{LF}}-1} \rightarrow \xi_{N_{\mathrm{LF}}} = \xi^{\ast}= \,($<span id="blue">$x^{\ast}$</span>$,
+v^{\ast})$
+</div>
+
+- Construct a trajectory by passing $\xi_{k}$ through $k\in\{1, 2, \ldots,
+  N_{\mathrm{LF}}\}$ leapfrog layers.
+![](assets/network_functions.svg)
+
+</div>
 
 ---
 
-<!-- .slide: data-background="assets/l2hmc/svgs/l2hmc7.svg" -->
+<!-- UPDATE WITH NETWORK AND FUNCTIONS -->
+<span style="font-size:0.5em;">
+<b>Fig. (a)</b> Illustration of the generalized leapfrog update (top)
+</span>
+<!-- <div style="align:top margin-bottom:0px;"> -->
+
+<div style="float:center; font-size:0.5em; text-align: center;">
+<img src="assets/leapfrog_update_combined.svg">
+</div>
+<div style="float:center; font-size:0.5em; text-align: center;">
+<b>Fig. (b)</b> Details of the functions $\Gamma^{\pm}$, $\Lambda^{\pm}$ for
+updating $v$ and $x$ respectively (bottom);
+</div>
+<img src="assets/network_functions.svg">
 
 ---
-	
+
+## Toy Example: GMM $\in \mathbb{R}^{2}$
+
+<div style="text-align:left; font-size:0.9em;">
+
+- <div id="note" style="padding:2px;"><b><u>Goal:</u></b> Train our sampler to
+  effectively sample from both modes of the target distribution.</div>
+- Maximize <span id="blue">_expected squared jump distance_</span>
+  <div id="note" style="text-align:center;max-width:75%;padding:2px;">
+  \[\mathcal{L}_{\theta}(\xi', \xi) \equiv
+  \color{#228BE6}{\mathbb{E}_{p(\xi)}\left[A(\xi'|\xi)\cdot \delta(\xi',
+  \xi)\right]}\]
+  </div>
+  where  $\delta(\xi, \xi') ={\lVert x - x'\rVert}^{2}$ is the squared jump
+  distance between $x'$ and $x$.
+
+<img src="assets/hmc_traj_eps05.svg" width=45% align="left">
+<img src="assets/hmc_traj_eps025.svg" width=45% align="right">
+
+</div>
+
+---
+
+## Toy Example: GMM $\in \mathbb{R}^{2}$
+
+![](assets/iso_gmm_chains.svg)
+
+---
+
+**Training Algorithm**
+
+<img src="assets/training_alg.svg" width=60% align="center">
+
+---
+## Annealing Schedule
+<div style="font-size:0.8em;">
+
+Introduce an _annealing schedule_ during the training phase:
+
+<div style="font-size:0.8em;">
+
+`\[\left\{\gamma_{t}\right\}=\left\{\gamma_{0}, \gamma_{1}, \ldots,
+\gamma_{N-1}, \gamma_{N}\right\},\text{ with}\]`
+`\[\gamma_{0}<\gamma_{1}<\gamma_{2}<\cdots<\gamma_{N}\equiv 1, \text{ and}\]`
+`\[|\gamma_{t+1}-\gamma_{t}|\ll 1 \]`
+
+</div>
+
+- For $\lVert\gamma_{t}\rVert<1$, this helps to rescale (shrink) the energy
+  barriers between isolated modes
+
+- Allows our sampler to explore previously inaccessible regions of the target distribution
+
+- Target distribution becomes <span id="blue">$p_{t}(x)\propto
+  e^{-\gamma_{t}S(x)}$</span> for $t = 0, 1, \ldots, N$
+
+</div>
+---
+
+### Lattice Gauge Theory
+
+<div id="left" style="max-width:43%;font-size:0.7em;"> 
+
+- **Link variables**: 
+<span id="blue">$U_{\mu}(x) = e^{i x_{\mu}(n)}\in U(1)$</span>
+with $x_{\mu}(n)\in[-\pi,\pi]$
+
+- **Wilson Action**:
+<span id="blue">$S_{\beta}(x) = \beta\sum_{P} 1 - \cos x_{P}$</span>
+with $x_{P}= x_{\mu}(n) + x_{\nu}(n+\hat{\mu})-x_{\mu}(n+\hat{\nu})-x_{\nu}(n)$
+
+- <b>Topological Charge</b>:
+  - <span id="note" style="padding:5px;font-size:0.9em;background:#D0F3D5;margin-bottom:10px;">`\(Q_{\mathbb{R}} =
+  \frac{1}{2\pi}\sum_{P} \sin x_{P}\in\mathbb{R}\)` ✅</span>
+  <span style="font-size:0.5em;">(continuous, differentiable)</span>
+
+  - <span id="note" style="padding:5px;font-size:0.9em;background:#F7C2CC;">`\(Q_{\mathbb{Z}} =
+  \frac{1}{2\pi}\sum_{P} \left\lfloor
+  x_{P}\right\rfloor\in\mathbb{Z}\,\,\)` ❌</span>
+  <span style="font-size:0.5em;">(discrete, hard to work with)</span>
+
+  here `\(\left\lfloor x_{P}\right\rfloor =
+  x_{P}-2\pi\left\lfloor\frac{x_{P}+\pi}{2\pi}\right\rfloor\)`
+
+</div>
+
+<div id="right">
+<img src="assets/plaq_tikz.svg" width=75% align="right">
+</div>
+
+
+---
+
+## Non-Compact Projection
+
+- Project $[-\pi, \pi]$ onto $\mathbb{R}$ using a transformation $z = g(x), g:
+  [-\pi, \pi]\rightarrow\mathbb{R}$
+  $$ z = \tan\left(\frac{x}{2}\right) $$
+- Perform the update in $\mathbb{R}$
+  $$ z' = m^{t}\odot z + \bar{m}^{t}\odot \left[\alpha z + \beta\right]$$
+
+---
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto:wght@500&family=Source+Sans+Pro&display=swap');
 
 :root {
-    --r-main-font: 'Source Sans Pro', sans-serif;
-    --r-heading-font: 'Open Sans', 'Roboto', Arial, Helvetica, sans-serif;
     --r-heading-text-transform: none;
     --r-heading1-size: 2.0em;
     --r-heading2-size: 1.5em;
@@ -230,8 +416,8 @@ $$ p(x, v) = p(x)\cdot p(v) = e^{-\beta S(x)}\cdot e^{-v^{T}v/2} $$
     --r-link-color: #00A2FF;
     --r-link-color-dark: #f92672;
     --r-link-color-hover: #63ff51;
-    --r-controls-color: #D7E6F3;
-    --r-progress-color: #f20052;
+    --r-controls-color: #228BE6;
+    --r-progress-color: #228BE6;
     --r-selection-background-color: rgba(30, 60, 107, 0.9);
     --r-selection-color: #fff;
     --r-main-font-size: 40px;
@@ -255,7 +441,6 @@ $$ p(x, v) = p(x)\cdot p(v) = e^{-\beta S(x)}\cdot e^{-v^{T}v/2} $$
 .reveal h2,
 .reveal h3,
 .reveal h4 {
-    font-family: var(--r-heading-font), 'Roboto', Arial, Helvetica, sans-serif;
     margin: var(--r-heading-margin);
     color: var(--r-heading-color);
     font-family: var(--r-heading-font);
@@ -270,7 +455,7 @@ $$ p(x, v) = p(x)\cdot p(v) = e^{-\beta S(x)}\cdot e^{-v^{T}v/2} $$
 
 .reveal h1 {
     font-size: var(--r-heading1-size);
-    font-weight: 1250;
+    font-weight: 1000;
 }
 
 .reveal h2 {
@@ -332,7 +517,7 @@ $$ p(x, v) = p(x)\cdot p(v) = e^{-\beta S(x)}\cdot e^{-v^{T}v/2} $$
     color: #F92672;
 }
 
-#brightred {
+#red {
     color: #FA5252;
 }
 

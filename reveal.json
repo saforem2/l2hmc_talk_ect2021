@@ -5,5 +5,5 @@
     "history": true,
     "slideNumber": true,
     "transition": "fade",
-    "center": true
+    "center": false
 }

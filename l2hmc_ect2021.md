@@ -289,14 +289,14 @@ font-size:0.6em;background-color:rgba(127,203,233,0.2); padding:3px;">
 
 ### Leapfrog Layer: Details
 
-<div style="font-size:0.6em; text-align:left;">
+<div style="font-size:0.75em;">
 
 - Introduce persistent direction $d\sim\mathcal{U}(+, -)$ (_forward_ / _backward_)
 
 - **Target Distribution**: $p(\xi) = p(x)\cdot p(v)\cdot p(d)$
 
 - $k^{th}$-Leapfrog Layer: `\(\xi_{k} = (x_{k}, v_{k}, \pm)\rightarrow (x''_{k}, v''_{k}, \pm)\)`
-<div id="note" style="font-size:0.9em;padding:1.5px;text-align:center;max-width:90%;">
+<div id="note" style="font-size:0.9em;padding:1.5px;text-align:center;max-width:100%;">
 $(\color{#F92672}{x_{k}}, v_{k})=\xi_{k}\rightarrow\xi':=\xi_{k+1}\rightarrow\cdots\rightarrow
 \xi_{N_{\mathrm{LF}}-1} \rightarrow \xi_{N_{\mathrm{LF}}} = \xi^{\ast}= \,(\color{#228BE6}{x^{\ast}},
 v^{\ast})$
@@ -304,7 +304,7 @@ v^{\ast})$
 
 - Construct a trajectory by passing $\xi_{k}$ through $k\in\{1, 2, \ldots,
   N_{\mathrm{LF}}\}$ leapfrog layers.
-![](assets/network_functions.svg)
+<img src="assets/network_functions.svg" width=100%>
 
 </div>
 
@@ -323,7 +323,7 @@ v^{\ast})$
 <b>Fig. (b)</b> Details of the functions $\Gamma^{\pm}$, $\Lambda^{\pm}$ for
 updating $v$ and $x$ respectively (bottom);
 </div>
-<img src="assets/network_functions.svg">
+<img src="assets/network_functions.svg" width=100%>
 
 ---
 
@@ -336,7 +336,7 @@ updating $v$ and $x$ respectively (bottom);
 - <div id="note" style="padding:2px;"><b><u>Goal:</u></b> Train our sampler to
   effectively sample from both modes of the target distribution.</div>
 - Maximize <span id="blue">_expected squared jump distance_</span>
-  <div id="note" style="text-align:center;padding:0.9px;font-size:0.75em;">
+  <div id="note" style="text-align:center; max-width:70%; padding:1px;">
   \[\mathcal{L}_{\theta}(\xi', \xi) \equiv
   \color{#228BE6}{\mathbb{E}_{p(\xi)}\left[A(\xi'|\xi)\cdot \delta(\xi',
   \xi)\right]}\]
@@ -344,8 +344,8 @@ updating $v$ and $x$ respectively (bottom);
   where  $\delta(\xi, \xi') ={\lVert x - x'\rVert}^{2}$ is the squared jump
   distance between $x'$ and $x$.
 
-<img src="assets/hmc_traj_eps05.svg" width=48% align=center>
-<img src="assets/hmc_traj_eps025.svg" width=48% align=center>
+<img src="assets/hmc_traj_eps05.svg" width=49% align=left>
+<img src="assets/hmc_traj_eps025.svg" width=49% align=right>
 
 </div>
 
@@ -387,9 +387,10 @@ Introduce an _annealing schedule_ during the training phase:
 </div>
 ---
 
-### Lattice Gauge Theory
+## Lattice Gauge Theory
 
-<div id="left" style="max-width:43%;font-size:0.7em;"> 
+<div class="float">
+<div id="left" style="max-width:40%;font-size:0.85em;"> 
 
 - **Link variables**: 
 <span id="blue">$U_{\mu}(x) = e^{i x_{\mu}(n)}\in U(1)$</span>
@@ -399,24 +400,30 @@ with $x_{\mu}(n)\in[-\pi,\pi]$
 <span id="blue">$S_{\beta}(x) = \beta\sum_{P} 1 - \cos x_{P}$</span>
 with $x_{P}= x_{\mu}(n) + x_{\nu}(n+\hat{\mu})-x_{\mu}(n+\hat{\nu})-x_{\nu}(n)$
 
+</div>
+
+<div id="right" style="max-width:40%;">
+
+<img src="assets/plaq_tikz.svg" width=60% align="right">   
+
+</div>
+
+</div>
+   
+<div class="float" style="align:left;">
+
 - <b>Topological Charge</b>:
-  - <span id="note" style="padding:5px;font-size:0.9em;background:#D0F3D5;margin-bottom:10px;">$Q_{\mathbb{R}} =
+  - <span id="note" style="padding:5px;background:#D0F3D5;margin-bottom:10px;">$Q_{\mathbb{R}} =
   \frac{1}{2\pi}\sum_{P} \sin x_{P}\in\mathbb{R}$ ✅</span>
   <span style="font-size:0.5em;">(continuous, differentiable)</span>
 
-  - <span id="note" style="padding:5px;font-size:0.9em;background:#F7C2CC;">$Q_{\mathbb{Z}} =
+  - <span id="note" style="padding:5px;background:#F7C2CC;">$Q_{\mathbb{Z}} =
   \frac{1}{2\pi}\sum_{P} \left\lfloor
   x_{P}\right\rfloor\in\mathbb{Z}$ ❌</span>
   <span style="font-size:0.5em;">(discrete, hard to work with)</span>
 
   here $\left\lfloor x_{P}\right\rfloor =
   x_{P}-2\pi\left\lfloor\frac{x_{P}+\pi}{2\pi}\right\rfloor$
-
-</div>
-
-<div id="right">
-
-<img src="assets/plaq_tikz.svg" width=75% align="right">
 
 </div>
 ---

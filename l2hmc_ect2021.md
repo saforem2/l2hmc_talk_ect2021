@@ -10,6 +10,7 @@ output:
     reveal_plugins: ["chalkboard"]
     reveal_options:
       chalkboard:
+        enabled: true
         theme: whiteboard
         toggleNotesButton: false
 ---
@@ -21,13 +22,13 @@ output:
 
 ### <span id="blue">[**Sam Foreman**](https://www.samforeman.me)</div>
 
-<small>09/30/2021</small></span>
+[Machine Learning for HEP, on and off the Lattice](https://indico.ectstar.eu/event/77/)   
+@ ECT* Trento   
+</small>
 
-<small>Machine Learning for HEP, on and off the Lattice @ ECT* - Trento</small>
-
-[`bit.ly/l2hmc-ect2021`](https://bit.ly/l2hmc-ect2021)
-
-
+<small>09/30/2021</small>   
+<!-- [`l2hmc-qcd`](https://github.com/saforem2/l2hmc-qcd) -->
+<!-- <small>[`web version`](https://bit.ly/l2hmc-ect2021)</small>    -->
 [<img align="left" width=10% src="assets/github.svg">](https://github.com/saforem2/l2hmc-qcd)
 [<img align="right" width=30% src="assets/Argonne_cmyk_white.svg">](https://alcf.anl.gov)
 

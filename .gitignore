@@ -5,6 +5,5 @@ old
 *.ttf
 *.woff
 asests/
-assets
 .sass-cache/
 custom/fonts

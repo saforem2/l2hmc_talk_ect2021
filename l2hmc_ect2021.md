@@ -650,7 +650,6 @@ DE-AC02-06CH11357.
 
 .reveal h1 {
     font-size: var(--r-heading1-size);
-    font-weight: 1000;
 }
 
 .reveal h2 {

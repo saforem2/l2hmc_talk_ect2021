@@ -34,7 +34,7 @@ output:
 
 ---
 
-# Motivation
+## Motivation
 
 - Want to calculate observables
   $$ \langle \mathcal{O}\rangle\propto\int\left[\mathcal{D}x\right]\mathcal{O}(x)e^{-S(x)} $$
@@ -357,7 +357,7 @@ updating $v$ and $x$ respectively (bottom);
 
 ---
 
-**Training Algorithm**
+## Training Algorithm
 
 <img src="assets/training_alg.svg" width=90% align="center">
 
@@ -428,7 +428,7 @@ with $x_{P}= x_{\mu}(n) + x_{\nu}(n+\hat{\mu})-x_{\mu}(n+\hat{\nu})-x_{\nu}(n)$
 </div>
 ---
 
-# Loss Function
+## Loss Function
 
 <div style="font-size:0.9em;">
 
@@ -473,7 +473,7 @@ for both the trained model (red) and HMC (black)
 
 ---
 
-# Interpretation
+## Interpretation
 <img src="assets/ridgeplots.svg" width=100%>
 <small>
 <b>(a.)</b> Deviation in the average plaquette (left);
@@ -601,7 +601,6 @@ DE-AC02-06CH11357.
 
 ---
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto:wght@500&family=Source+Sans+Pro&display=swap');
 
 :root {
     --r-heading-text-transform: none;

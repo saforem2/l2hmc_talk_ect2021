@@ -1,29 +1,7 @@
-/* @import url(./fonts/source-sans-pro/source-sans-pro.css); */
-/* @import url("fonts/montserrat/montserrat.css");
-@import url("fonts/opensans/opensans.css");
-@import url("fonts/lato/lato.css");
-@import url("fonts/asul/asul.css");
-@import url("fonts/josefinsans/josefinsans.css");
-@import url("fonts/league/league_gothic.css");
-@import url("fonts/merriweathersans/merriweathersans.css");
-@import url("fonts/overpass/overpass.css");
-@import url("fonts/overpass2/overpass2.css");
-@import url("fonts/quicksand/quicksand.css");
-@import url("fonts/cabinsketch/cabinsketch.css");
-@import url("fonts/newscycle/newscycle.css");
-@import url("fonts/oxygen/oxygen.css"); */
-/* @import url("../custom/fonts/opensans/opensans.css") */
-
 @font-face {
     font-family: KaTeX_Math;
     src: url('../custom/fonts/katex/KaTeX_Main-Regular.woff');
 }
-
-
-/* @font-face {
-    font-family: Roboto-Regular;
-    src: url('./font/roboto/Roboto-Regular.ttf');
-} */
 
 section.has-dark-background,
 section.has-dark-background h1,
@@ -69,13 +47,13 @@ section.has-dark-background h6 {
 }
 
 .reveal .katex .mathdefault {
-    font-family: KaTeX_Math;
+    font-family: 'KaTeX_Math';
     font-style: italic;
     src: ('../custom/fonts/katex/KaTeX_Math-Italic.ttf');
 }
 
 .katex .mathdefault {
-    font-family: KaTeX_Math;
+    font-family: 'KaTeX_Math';
     font-style: italic;
     src: ('../custom/fonts/katex/KaTeX_Math-Italic.ttf');
 }

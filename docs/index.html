@@ -33,7 +33,7 @@
 [<img align="left" width=10% src="assets/github.svg">](https://github.com/saforem2/l2hmc-qcd)
 [<img align="right" width=30% src="assets/Argonne_cmyk_white.svg">](https://alcf.anl.gov)
 </script></section><section  data-markdown><script type="text/template">
-# Motivation
+## Motivation
 
 - Want to calculate observables
   $$ \langle \mathcal{O}\rangle\propto\int\left[\mathcal{D}x\right]\mathcal{O}(x)e^{-S(x)} $$
@@ -324,7 +324,7 @@ updating $v$ and $x$ respectively (bottom);
 
 ![](assets/iso_gmm_chains.svg)
 </script></section><section  data-markdown><script type="text/template">
-**Training Algorithm**
+## Training Algorithm
 
 <img src="assets/training_alg.svg" width=90% align="center">
 </script></section><section  data-markdown><script type="text/template">## Annealing Schedule
@@ -389,7 +389,7 @@ with $x_{P}= x_{\mu}(n) + x_{\nu}(n+\hat{\mu})-x_{\mu}(n+\hat{\nu})-x_{\nu}(n)$
   x_{P}-2\pi\left\lfloor\frac{x_{P}+\pi}{2\pi}\right\rfloor$
 
 </div></script></section><section  data-markdown><script type="text/template">
-# Loss Function
+## Loss Function
 
 <div style="font-size:0.9em;">
 
@@ -426,7 +426,7 @@ for both the trained model (red) and HMC (black)
 ## Effective Action: $S_{\mathrm{eff}}(x)$
 <img src="assets/plaqsf_beta.svg" width=82%>
 </script></section><section  data-markdown><script type="text/template">
-# Interpretation
+## Interpretation
 <img src="assets/ridgeplots.svg" width=100%>
 <small>
 <b>(a.)</b> Deviation in the average plaquette (left);
@@ -536,7 +536,6 @@ DE-AC02-06CH11357.
 
 <img src="assets/dynamics_vnet.png"  align=center width=36%>
 </script></section><section  data-markdown><script type="text/template"><style>
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto:wght@500&family=Source+Sans+Pro&display=swap');
 
 :root {
     --r-heading-text-transform: none;
@@ -717,7 +716,7 @@ DE-AC02-06CH11357.
       // options from URL query string
       var queryOptions = Reveal().getQueryHash() || {};
 
-      var options = extend(defaultOptions, {"title":"l2hmc-qcd @ ECT 2021","controls":true,"progress":true,"history":true,"slideNumber":true,"transition":"fade","center":false}, queryOptions);
+      var options = extend(defaultOptions, {"title":"l2hmc-qcd @ ECT 2021","controls":true,"progress":true,"history":true,"slideNumber":true,"transition":"slide","parallaxBackgroundSize":"2100px 900px","center":false}, queryOptions);
     </script>
 
 

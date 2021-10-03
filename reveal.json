@@ -4,6 +4,7 @@
     "progress": true,
     "history": true,
     "slideNumber": true,
-    "transition": "fade",
-    "center": false
+    "transition": "slide",
+    "parallaxBackgroundSize": "2100px 900px",
+    "center": false 
 }
